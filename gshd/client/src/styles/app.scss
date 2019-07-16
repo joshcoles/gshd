@@ -1,0 +1,67 @@
+@import 'normalize';
+@import 'variables';
+@import 'fonts';
+
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+header {
+  background-color: $primary-color-light;
+  min-height: 600px;
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+    height: 50px;
+    border-top: 10px solid $white;
+    border-bottom: 10px solid $white;
+  }
+  &:before {
+    border-bottom: 10px solid $secondary-color-light;
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 50px;
+  }
+}
+
+.hero-content {
+  padding-top: 200px;
+  color: white;
+  position: absolute;
+  right: 0;
+  width: 50%;
+  z-index: 10;
+}
+
+.hero-bg-gretzky {
+  background-image: url('../images/hero-image.png');
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-repeat: no-repeat;
+  z-index: 5;
+}
+
+nav {
+  display: flex;
+  
+  img {
+    max-width: 50px;
+  }
+  ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+}
