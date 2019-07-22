@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class CreateDog extends Component {
 
@@ -39,7 +40,7 @@ class CreateDog extends Component {
 
   onImageChange(e) {
     this.setState({
-      location: e.target.value
+      image: e.target.value
     });
   }
 
@@ -56,14 +57,24 @@ class CreateDog extends Component {
       rating: ${this.state.rating}
       image: ${this.state.image}
     
-    `)
+    `);
+
+    const newGshd = {
+      gshd_title: this.state.title,
+      gshd_location: this.state.location,
+      gshd_rating: this.state.rating,
+      gshd_image: this.state.image
+    }
+
+    axios.post('http://localhost:4000/gshds/add', newGshd)
+      .then(res => console.log(res.data));
 
     this.setState({
       title: '',
       location: '',
       rating: 0,
       image: ''
-    })
+    });
   }
 
   render() {

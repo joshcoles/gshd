@@ -17,9 +17,9 @@ class App extends Component {
           <nav>
             <Link to="/"><img src={icon} alt=""/></Link>
             <ul>
-              <li><Link to="/dog-list">My Dogs</Link></li>
-              <li><Link to="/edit-dog/:id">Edit Dog</Link></li>
-              <li><Link to="/create-dog">Create Dog</Link></li>
+              <li style={{ marginRight: 10 }}><Link to="/dog-list">My Dogs</Link></li>
+              <li style={{ marginRight: 10 }}><Link to="/edit-dog/:id">Edit Dog</Link></li>
+              <li style={{ marginRight: 10 }}><Link to="/create-dog">Create Dog</Link></li>
             </ul>
           </nav>
           <Route path="/" exact component={LandingPage}/>
