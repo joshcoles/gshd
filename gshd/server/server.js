@@ -1,3 +1,4 @@
+// Imports
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -5,8 +6,9 @@ const cors = require('cors');
 const PORT = 4000;
 const gshdRoutes = express.Router();
 const mongoose = require('mongoose');
-let GSHD = require('./gshd.model');
+const GSHD = require('./gshd.model');
 
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -17,30 +19,66 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully.");
 });
 
+// ---------------------------------------------
+// GET /gshds/
+// ---------------------------------------------
 gshdRoutes.route('/').get((req, res) => {
   GSHD.find((err, gshds) => {
     if (err) {
-      console.log(err);
+      console.log(`
+        -----------------------------------
+        GSHD Error when attempting to GET /gshds/
+        ${err}
+      `);
     } else {
+      console.log(`
+        GSHD Success: request made to /gshds/
+      `);
       res.json(gshds);
     }
   })
 });
 
+// ---------------------------------------------
+// GET /gshds/:id
+// ---------------------------------------------
 gshdRoutes.route('/:id').get((req, res) => {
+  
   let id = req.params.id;
+
   GSHD.findById(id, (err, gshd) => {
-    res.json(gshd);
+    if (err) {
+      console.log(`
+        -----------------------------------
+        GSHD Error when attempting to GET /gshds/:id 
+        ${err}
+      `);
+    } else {
+      console.log(`
+        GSHD Success: request made to /gshds/${id}
+      `);
+      res.json(gshd);
+    }
   });
 });
 
+
+// ---------------------------------------------
+// POST /gshds/add
+// ---------------------------------------------
 gshdRoutes.route('/add').post((req, res) => {
+
+  // Create new document (instance of a model) using data pulled from request
   const gshd = new GSHD(req.body);
+  console.log(req.body);
+
+  // Save document to DB
   gshd.save()
     .then(gshd => {
       res.status(200).json({'GSHD': 'GSHD added successfully'});
     })
     .catch(err => {
+      console.log(err);
       res.status(400).send('Failed to add GSHD');
     });
 });

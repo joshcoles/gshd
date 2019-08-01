@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Map from './Map.js';
 
 const Gshd = (props) => (
   <li>{props.gshd.gshd_title}<Link to={`/edit-dog/${props.gshd._id}`}>Edit</Link></li>
-
 )
 
 class DogList extends Component {
@@ -35,23 +35,16 @@ class DogList extends Component {
 
   render() {
 
-    // const gshds = this.state.gshds.map((gshd) => 
-    //   <li key={gshd._id}>{gshd.gshd_title}</li>
-    // );
-    console.log(this.state.gshds)
     return (
       <div>
         <h1>DogList</h1>
         <ul>
-         {/* {
-           this.state.gshds.map((gshd) => 
-            <li key={gshd._id}>{gshd.gshd_title}</li>
-          )
-        } */}
-        {
-          this.dogList()
-        }
+          {this.dogList()}
         </ul>
+        <hr/>
+          <div className="map-container">
+            <Map gshds={this.state.gshds}/>
+          </div>
       </div>
     )
   }

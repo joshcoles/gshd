@@ -10,13 +10,19 @@ class CreateDog extends Component {
       title: '',
       location: '',
       rating: 0,
-      image: ''
+      image: '',
+      geometry: {
+        lat: '',
+        long: ''
+      }
     }
 
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onLocationChange = this.onLocationChange.bind(this);
     this.onRatingChange = this.onRatingChange.bind(this);
     this.onImageChange = this.onImageChange.bind(this);
+    this.onLatChange = this.onLatChange.bind(this);
+    this.onLongChange = this.onLongChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -44,6 +50,32 @@ class CreateDog extends Component {
     });
   }
 
+  onLatChange(e) {
+
+    const newGeometry = {
+      ...this.state.geometry
+    };
+
+    newGeometry.lat = e.target.value;
+
+    this.setState({
+      geometry: newGeometry
+    });
+  }
+
+  onLongChange(e) {
+
+    const newGeometry = {
+      ...this.state.geometry
+    };
+
+    newGeometry.long = e.target.value;
+
+    this.setState({
+      geometry: newGeometry
+    });
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -56,14 +88,18 @@ class CreateDog extends Component {
       location: ${this.state.location}
       rating: ${this.state.rating}
       image: ${this.state.image}
-    
+      lat: ${this.state.geometry.lat}
+      long: ${this.state.geometry.long}
     `);
 
     const newGshd = {
       gshd_title: this.state.title,
       gshd_location: this.state.location,
       gshd_rating: this.state.rating,
-      gshd_image: this.state.image
+      gshd_image: this.state.image,
+      gshd_geometry: {
+        coordinates: [parseInt(this.state.geometry.long), parseInt(this.state.geometry.lat)]
+      }
     }
 
     axios.post('http://localhost:4000/gshds/add', newGshd)
@@ -73,7 +109,11 @@ class CreateDog extends Component {
       title: '',
       location: '',
       rating: 0,
-      image: ''
+      image: '',
+      geometry: {
+        lat: '',
+        long: ''
+      }
     });
   }
 
@@ -96,9 +136,15 @@ class CreateDog extends Component {
           <label htmlFor="rating">Enter Rating out of 10</label>
           <input name="rating" type="text" placeholder="7.5" onChange={this.onRatingChange} value={this.state.rating}/>
 
-          <label htmlFor="title">Add Image</label>
+          <label htmlFor="image">Add Image</label>
           <input name="image" type="text" placeholder="https://www.imgur.com/gshd" onChange={this.onImageChange} value={this.state.image}/>
             
+          <label htmlFor="lat">Choose Latitude</label>
+          <input name="lat" type="text" placeholder="" onChange={this.onLatChange} value={this.state.geometry.lat} />
+
+          <label htmlFor="long">Choose Longitude</label>
+          <input name="long" type="text" placeholder="" onChange={this.onLongChange} value={this.state.geometry.long} />
+
           <input type="submit" value="Create Dog"/>
         </form>
       </div>

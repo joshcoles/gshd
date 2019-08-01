@@ -65,3 +65,17 @@ nav {
     list-style: none;
   }
 }
+
+.map-container {
+  height: 300px;
+  position: relative;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  input {
+    margin-bottom: 10px;
+  }
+}

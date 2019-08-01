@@ -14,13 +14,13 @@ class App extends Component {
     return (
       <Router>
         <div id="gshd" className="App">
-          <nav>
-            <Link to="/"><img src={icon} alt=""/></Link>
-            <ul>
-              <li style={{ marginRight: 10 }}><Link to="/dog-list">My Dogs</Link></li>
-              <li style={{ marginRight: 10 }}><Link to="/edit-dog/:id">Edit Dog</Link></li>
-              <li style={{ marginRight: 10 }}><Link to="/create-dog">Create Dog</Link></li>
-            </ul>
+          <nav className="navbar is-dark" role="navigation" aria-label="main navigation">
+            <Link className="navbar-brand" to="/"><img src={icon} alt=""/></Link>
+            <div className="navbar-start">
+              <Link className="navbar-item" to="/dog-list">My Dogs</Link>
+              <Link className="navbar-item" to="/edit-dog/:id">Edit Dog</Link>
+              <Link className="navbar-item" to="/create-dog">Create Dog</Link>
+            </div>
           </nav>
           <Route path="/" exact component={LandingPage}/>
           <Route path="/dog-list" component={DogList}/>

@@ -1,0 +1,23 @@
+[
+  {
+    "gshd_title": "My First GSHD!",
+    "gshd_location": "Costco, Vancouver BC",
+    "gshd_rating": 10,
+    "gshd_image": "https://leitesculinaria.com/wp-content/uploads/fly-images/96169/best-hot-dog-recipe-fi-400x225-c.jpg",
+    "gshd_geometry": {"type": "point", "coordinates": [-80, 25.72]}
+  },
+  {
+    "gshd_title": "My First GSHD!",
+    "gshd_location": "Costco, Vancouver BC",
+    "gshd_rating": 10,
+    "gshd_image": "https://leitesculinaria.com/wp-content/uploads/fly-images/96169/best-hot-dog-recipe-fi-400x225-c.jpg",
+    "gshd_geometry": {"type": "point", "coordinates": [-80, 25.72]}
+  },
+  {
+    "gshd_title": "My First GSHD!",
+    "gshd_location": "Costco, Vancouver BC",
+    "gshd_rating": 10,
+    "gshd_image": "https://leitesculinaria.com/wp-content/uploads/fly-images/96169/best-hot-dog-recipe-fi-400x225-c.jpg",
+    "gshd_geometry": {"type": "point", "coordinates": [-80, 25.72]}
+  }
+]

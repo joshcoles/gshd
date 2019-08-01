@@ -15,26 +15,31 @@ class LandingPage extends Component {
   }
 
   render(props) {
-    console.log(this.props);
+    
     return (
       <div className="landing-page">
-        <header>
-          <nav></nav>
-          <div className="hero-content">
-            <h1>Gretzky-Style Hot Dog</h1>
-            <span>An ode to Waynge Gretzky's strange eating habits.</span>
-          </div> 
-          <div className="hero-bg-gretzky"></div>
-        </header>
-        <section>
-          <h2>A Man of Tradition and Great Taste</h2>
+        <section className="hero is-large is-dark is-bold">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">Gretzky-Style Hot Dog</h1>
+              <h2 className="subtitle">An ode to Wayne Gretzky's strange eating habits.</h2>
+            </div>
+          </div>
         </section>
-        <section>
+        <section className="section">
+          <div className="container">
+            <h2>A Man of Tradition and Great Taste</h2>
+            <p>Lulu lemon west coast best coast cambie west coast best coast translink lions heading up to whistler whitecaps false creek rain lulu lemon government heading up to whistler.</p>
+            <p>West coast best coast vancouverites vancouverites mountains canucks vancouver skytrain heading up to whistler vancouver developers lulu lemon sedins stanley park arby's new brunch spot on main street government lions whitecaps heading up to whistler.</p>
+          </div>
+          
+        </section>
+        <section className="section">
           <h2>What is this?</h2>
           <p>On June 15th, someone created <a href={this.state.landingPage.articleLink}>this post</a> on the /r/hockey subreddit. While that user has since deleted their account, but their story will live on forever.</p>
           <p>Shortly after, I created gretzkystylehotdog</p>
         </section>
-        <section>
+        <section className="section">
           <span>{this.state.landingPage.gretzkyQuotes.secret}</span>
         </section>
       </div>
