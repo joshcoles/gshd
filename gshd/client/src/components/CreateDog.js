@@ -13,7 +13,7 @@ class CreateDog extends Component {
       image: '',
       geometry: {
         lat: '',
-        long: ''
+        lng: ''
       }
     }
 
@@ -69,7 +69,7 @@ class CreateDog extends Component {
       ...this.state.geometry
     };
 
-    newGeometry.long = e.target.value;
+    newGeometry.lng = e.target.value;
 
     this.setState({
       geometry: newGeometry
@@ -89,7 +89,7 @@ class CreateDog extends Component {
       rating: ${this.state.rating}
       image: ${this.state.image}
       lat: ${this.state.geometry.lat}
-      long: ${this.state.geometry.long}
+      long: ${this.state.geometry.lng}
     `);
 
     const newGshd = {
@@ -98,7 +98,7 @@ class CreateDog extends Component {
       gshd_rating: this.state.rating,
       gshd_image: this.state.image,
       gshd_geometry: {
-        coordinates: [parseInt(this.state.geometry.long), parseInt(this.state.geometry.lat)]
+        coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat)]
       }
     }
 
@@ -112,7 +112,7 @@ class CreateDog extends Component {
       image: '',
       geometry: {
         lat: '',
-        long: ''
+        lng: ''
       }
     });
   }
@@ -143,7 +143,7 @@ class CreateDog extends Component {
           <input name="lat" type="text" placeholder="" onChange={this.onLatChange} value={this.state.geometry.lat} />
 
           <label htmlFor="long">Choose Longitude</label>
-          <input name="long" type="text" placeholder="" onChange={this.onLongChange} value={this.state.geometry.long} />
+          <input name="long" type="text" placeholder="" onChange={this.onLongChange} value={this.state.geometry.lng} />
 
           <input type="submit" value="Create Dog"/>
         </form>

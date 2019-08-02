@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
-// https://dev.to/jessicabetts/how-to-use-google-maps-api-and-react-js-26c2
-
+/*
+  Built following this guide:
+  https://dev.to/jessicabetts/how-to-use-google-maps-api-and-react-js-26c2
+*/
+ 
+// Fetch API token from .env
 const googleMapsApiToken = process.env.REACT_APP_GOOGLE_MAPS_API_TOKEN;
 
 class GoogleMap extends Component {
@@ -10,28 +14,19 @@ class GoogleMap extends Component {
   
     return (
       <Map
-        height="500"
-        width="500"
         google={this.props.google}
         zoom={2}
-        initialCenter={{ lat: 47.444, lng: -122.176}}>
-          {/* <Marker position={{ lat: 47.444, lng: -122.176 }}/> */}
+        initialCenter={{ lat: 49.2827, lng: -123.1207}}>
         {
           this.props.gshds.map((gshd, index) => {
             const lat = this.props.gshds[index].gshd_geometry.coordinates[0];
             const lng = this.props.gshds[index].gshd_geometry.coordinates[1];
             return (
               <Marker key={index} position={{ lat: lat, lng: lng }}/>
-              // <div key={index} position={{ 
-              //   lat: 48.123, 
-              //   lng: 122.244
-              // }}></div>
-              
             )
           })
         }
       </Map>
-    
     );
   }
 }

@@ -6,18 +6,31 @@ class EditDog extends Component {
   constructor(props) {
     super(props);
     
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangeRating = this.onChangeRating.bind(this);
-    this.onChangeImage = this.onChangeImage.bind(this);
-    
     this.state = {
       title: '',
       location: '',
       rating: 0,
-      image: ''
+      image: '',
+      geometry: {
+        lat: '',
+        lng: ''
+      }
     }
+    
+    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.onChangeRating = this.onChangeRating.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
+    this.onChangeLatitude = this.onChangeLatitude.bind(this);
+    this.onChangeLongitude = this.onChangeLongitude.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    
+    // this.state = {
+    //   title: '',
+    //   location: '',
+    //   rating: 0,
+    //   image: ''
+    // }
   }
 
   componentDidMount() {
@@ -27,10 +40,12 @@ class EditDog extends Component {
           title: res.data.gshd_title,
           location: res.data.gshd_location,
           rating: res.data.gshd_rating,
-          image: res.data.gshd_image
-        })
-
-        // console.log(this.state);
+          image: res.data.gshd_image, 
+          geometry: {
+            lat: res.data.gshd_geometry.coordinates[0],
+            lng: res.data.gshd_geometry.coordinates[1]
+          }
+        });
       })
       .catch(err => console.error(err));
   }
@@ -42,7 +57,10 @@ class EditDog extends Component {
       gshd_title: this.state.title,
       gshd_location: this.state.location,
       gshd_rating: this.state.rating,
-      gshd_image: this.state.image
+      gshd_image: this.state.image,
+      gshd_geometry: {
+        coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat),]
+      }
     }
 
     console.log("Firing");
@@ -76,6 +94,24 @@ class EditDog extends Component {
       image: e.target.value
     });
   }
+  onChangeLatitude(e) {
+    const newGeometry = {...this.state.geometry}
+    newGeometry.lat = e.target.value;
+
+    this.setState({
+      geometry: newGeometry
+    });
+  }
+
+  onChangeLongitude(e) {
+    const newGeometry = {...this.state.geometry}
+    newGeometry.lng = e.target.value;
+
+    this.setState({
+      geometry: newGeometry
+    });
+  }
+
 
   render() {
 
@@ -108,6 +144,21 @@ class EditDog extends Component {
               value={this.state.image}
               onChange={this.onChangeImage}
             />
+
+            <label>Latitude</label>
+            <input 
+              type="text"
+              value={this.state.geometry.lat}
+              onChange={this.onChangeLatitude}
+            />
+
+            <label>Longitude</label>
+            <input 
+              type="text"
+              value={this.state.geometry.lng}
+              onChange={this.onChangeLongitude}
+            />
+
           </div>
           <input type="submit" value="Update GSHD" />
         </form>
