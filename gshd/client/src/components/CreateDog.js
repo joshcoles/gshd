@@ -120,33 +120,99 @@ class CreateDog extends Component {
   render() {
     return (
       <div>
-        <h1>CreateDog</h1>
-        <form onSubmit={this.onSubmit}>
-          <label htmlFor="title">Enter Title</label>
-          <input 
-            name="title" 
-            type="text" 
-            placeholder="Tasty boi" 
-            onChange={this.onTitleChange} 
-            value={this.state.title}/>
+        <section className="section">
+          <h1>CreateDog</h1>
+          <div className="container columns">
+            <form className="column" onSubmit={this.onSubmit}>
 
-          <label htmlFor="location">Enter Location</label>
-          <input name="location" type="text" placeholder="Costco" onChange={this.onLocationChange} value={this.state.location}/>
+              <div className="field">
+                <label className="label" htmlFor="title">Title</label>
+                <div className="control">
+                  <input 
+                    className="input" 
+                    type="text" 
+                    name="title" 
+                    placeholder="Memorial Day All-Timer" 
+                    onChange={this.onTitleChange} 
+                    value={this.state.title}
+                    />
+                </div>
+              </div>
 
-          <label htmlFor="rating">Enter Rating out of 10</label>
-          <input name="rating" type="text" placeholder="7.5" onChange={this.onRatingChange} value={this.state.rating}/>
+              <div className="field">
+                <label className="label" htmlFor="location">Location</label>
+                <div className="control">
+                  <input 
+                    className="input" 
+                    type="text" 
+                    name="location" 
+                    placeholder="The Beach" 
+                    onChange={this.onLocationChange} 
+                    value={this.state.location}
+                    />
+                </div>
+              </div>
 
-          <label htmlFor="image">Add Image</label>
-          <input name="image" type="text" placeholder="https://www.imgur.com/gshd" onChange={this.onImageChange} value={this.state.image}/>
-            
-          <label htmlFor="lat">Choose Latitude</label>
-          <input name="lat" type="text" placeholder="" onChange={this.onLatChange} value={this.state.geometry.lat} />
+              <div className="field">
+                <label className="label" htmlFor="rating">Rating out of 10</label>
+                <div className="control">
+                  <input 
+                    className="input" 
+                    type="text" 
+                    name="rating" 
+                    placeholder="7" 
+                    onChange={this.onRatingChange} 
+                    value={this.state.rating}
+                    />
+                </div>
+              </div>
 
-          <label htmlFor="long">Choose Longitude</label>
-          <input name="long" type="text" placeholder="" onChange={this.onLongChange} value={this.state.geometry.lng} />
+              <div className="field">
+                <label className="label" htmlFor="image">Image</label>
+                <div className="control">
+                  <input 
+                    className="input" 
+                    type="text" 
+                    name="image" 
+                    placeholder="https://www.imgur.com/gshd" 
+                    onChange={this.onImageChange} 
+                    value={this.state.image}
+                    />
+                </div>
+              </div>
 
-          <input type="submit" value="Create Dog"/>
-        </form>
+              <div className="field">
+                <label className="label" htmlFor="latitude">Latitude</label>
+                <div className="control">
+                  <input 
+                    className="input" 
+                    type="text" 
+                    name="latitude" 
+                    placeholder="60" 
+                    onChange={this.onLatChange} 
+                    value={this.state.geometry.lat}
+                    />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label" htmlFor="longitude">Longitude</label>
+                <div className="control">
+                  <input 
+                    className="input" 
+                    type="text" 
+                    name="longitude" 
+                    placeholder="60" 
+                    onChange={this.onLongChange} 
+                    value={this.state.geometry.lng}
+                    />
+                </div>
+              </div>
+
+              <input className="button" type="submit" value="Create Dog"/>
+            </form>
+          </div>
+        </section>
       </div>
     )
   }

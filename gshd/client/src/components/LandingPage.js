@@ -18,7 +18,7 @@ class LandingPage extends Component {
     
     return (
       <div className="landing-page">
-        <section className="hero is-large is-dark is-bold">
+        <section className="hero">
           <div className="hero-body">
             <div className="container">
               <h1 className="title">Gretzky-Style Hot Dog</h1>
@@ -35,12 +35,16 @@ class LandingPage extends Component {
           
         </section>
         <section className="section">
-          <h2>What is this?</h2>
-          <p>On June 15th, someone created <a href={this.state.landingPage.articleLink}>this post</a> on the /r/hockey subreddit. While that user has since deleted their account, but their story will live on forever.</p>
-          <p>Shortly after, I created gretzkystylehotdog</p>
+          <div className="container">
+            <h2>What is this?</h2>
+            <p>On June 15th, someone created <a href={this.state.landingPage.articleLink}>this post</a> on the /r/hockey subreddit. While that user has since deleted their account, but their story will live on forever.</p>
+            <p>Shortly after, I created gretzkystylehotdog</p>
+          </div>
         </section>
         <section className="section">
-          <span>{this.state.landingPage.gretzkyQuotes.secret}</span>
+          <div className="container">
+           <span>{this.state.landingPage.gretzkyQuotes.secret}</span>
+          </div>
         </section>
       </div>
     )

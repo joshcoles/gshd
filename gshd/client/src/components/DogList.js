@@ -4,7 +4,20 @@ import axios from 'axios';
 import Map from './Map.js';
 
 const Gshd = (props) => (
-  <li>{props.gshd.gshd_title}<Link to={`/edit-dog/${props.gshd._id}`}>Edit</Link></li>
+  <li className="box">
+    <div className="media">
+      <div className="media-left">
+        <figure className="image is-64x64"><img src={props.gshd.gshd_image} alt="Image"/></figure>
+      </div>
+      <div className="media-content">
+        <div className="content">
+          <strong>{props.gshd.gshd_title}</strong>
+          <br/>
+          <Link to={`/edit-dog/${props.gshd._id}`}>Edit</Link>
+        </div>
+      </div>
+    </div>
+  </li>
 )
 
 class DogList extends Component {
@@ -36,16 +49,25 @@ class DogList extends Component {
   render() {
 
     return (
-      <div>
-        <h1>DogList</h1>
-        <ul>
-          {this.dogList()}
-        </ul>
-        <hr/>
-          <div className="map-container">
-            <Map gshds={this.state.gshds}/>
+      <section className="section">
+
+        <div className="container">
+          <h1>Your Gretzky-Style Hot Dogs</h1>
+
+          <div className="columns">
+            <div className="column is-one-third">
+              <ul>
+                {this.dogList()}
+              </ul>
+            </div>
+            <div className="column is-two-thirds">
+              <div className="map-container">
+                <Map gshds={this.state.gshds}/>
+              </div>
+            </div>
           </div>
-      </div>
+        </div>
+      </section>
     )
   }
 }
