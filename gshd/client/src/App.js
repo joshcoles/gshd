@@ -5,6 +5,7 @@ import DogList from './components/DogList.js';
 import LandingPage from './components/LandingPage.js';
 import EditDog from './components/EditDog.js';
 import CreateDog from './components/CreateDog.js'
+import AutoCompletePlaces from './components/AutoCompletePlaces.js';
 import icon from './images/gshd.png';
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
               <Link className="navbar-item" to="/">
                 <img src={icon} alt=""/>
               </Link>
-              <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <a href="/" role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -29,14 +30,15 @@ class App extends Component {
               <div className="navbar-start">
                 <Link className="navbar-item" to="/dog-list">My Dogs</Link>
                 <Link className="navbar-item" to="/create-dog">Create Dog</Link>
+                <Link className="navbar-item" to="/autocomplete-places">Autocomplete Test</Link>
               </div>
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <a className="button is-primary">
+                    <a href="/" className="button is-primary">
                       <strong>Sign up</strong>
                     </a>
-                    <a className="button is-light">
+                    <a href="/" className="button is-light">
                       Log in
                     </a>
                   </div>
@@ -48,6 +50,7 @@ class App extends Component {
           <Route path="/dog-list" component={DogList}/>
           <Route path="/create-dog" component={CreateDog}/>
           <Route path="/edit-dog/:id" component={EditDog}/>
+          <Route path="/autocomplete-places" component={AutoCompletePlaces}/>
         </div>
       </Router>
     );

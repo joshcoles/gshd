@@ -7,7 +7,7 @@ const Gshd = (props) => (
   <li className="box">
     <div className="media">
       <div className="media-left">
-        <figure className="image is-64x64"><img src={props.gshd.gshd_image} alt="Image"/></figure>
+        <figure className="image is-64x64"><img src={props.gshd.gshd_image} alt="A hot dog"/></figure>
       </div>
       <div className="media-content">
         <div className="content">

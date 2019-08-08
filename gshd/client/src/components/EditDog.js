@@ -25,12 +25,6 @@ class EditDog extends Component {
     this.onChangeLongitude = this.onChangeLongitude.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     
-    // this.state = {
-    //   title: '',
-    //   location: '',
-    //   rating: 0,
-    //   image: ''
-    // }
   }
 
   componentDidMount() {
@@ -117,53 +111,101 @@ class EditDog extends Component {
 
     return (
       <div>
-        <h3>Edit GSHD</h3>
-        <form onSubmit={this.onSubmit}>
-          <div>
-            <label>Title</label>
-            <input 
-              type="text" 
-              value={this.state.title}
-              onChange={this.onChangeTitle}
-            />
-            <label>Location</label>
-            <input 
-              type="text" 
-              value={this.state.location}
-              onChange={this.onChangeLocation}
-            />
-            <label>Rating</label>
-            <input 
-              type="text" 
-              value={this.state.rating}
-              onChange={this.onChangeRating}
-            />
-            <label>Image</label>
-            <input 
-              type="text" 
-              value={this.state.image}
-              onChange={this.onChangeImage}
-            />
+        <section className="section">
+          <h1>Edit your Gretzky-Style Hot Dog</h1>
+          <div className="container columns">
+              <form className="column" onSubmit={this.onSubmit}>
+                <div className="container columns">
 
-            <label>Latitude</label>
-            <input 
-              type="text"
-              value={this.state.geometry.lat}
-              onChange={this.onChangeLatitude}
-            />
+                    <div className="column">
+                      <div className="field">
+                        <label className="label" htmlFor="title">Title</label>
+                        <div className="control">
+                          <input 
+                            className="input" 
+                            type="text" 
+                            name="title" 
+                            onChange={this.onChangeTitle} 
+                            value={this.state.title}
+                            />
+                        </div>
+                      </div>
 
-            <label>Longitude</label>
-            <input 
-              type="text"
-              value={this.state.geometry.lng}
-              onChange={this.onChangeLongitude}
-            />
 
+                      <div className="field">
+                        <label className="label" htmlFor="location">Location</label>
+                        <div className="control">
+                          <input 
+                            className="input" 
+                            type="text" 
+                            name="location" 
+                            onChange={this.onChangeLocation} 
+                            value={this.state.location}
+                            />
+                        </div>
+                      </div>
+
+                      <div className="field">
+                        <label className="label" htmlFor="rating">Rating</label>
+                        <div className="control">
+                          <input 
+                            className="input" 
+                            type="text" 
+                            name="rating" 
+                            onChange={this.onChangeRating} 
+                            value={this.state.rating}
+                            />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="column">
+                      <div className="field">
+                        <label className="label" htmlFor="image">Image</label>
+                        <div className="control">
+                          <input 
+                            className="input" 
+                            type="text" 
+                            name="image" 
+                            onChange={this.onChangeImage} 
+                            value={this.state.image}
+                            />
+                        </div>
+                      </div>
+
+                      <div className="field">
+                        <label className="label" htmlFor="latitude">Latitude</label>
+                        <div className="control">
+                          <input 
+                            className="input" 
+                            type="text" 
+                            name="latitude" 
+                            onChange={this.onChangeLatitude} 
+                            value={this.state.geometry.lat}
+                            />
+                        </div>
+                      </div>
+
+
+                      <div className="field">
+                        <label className="label" htmlFor="longitude">Longitude</label>
+                        <div className="control">
+                          <input 
+                            className="input" 
+                            type="text" 
+                            name="longitude" 
+                            onChange={this.onChangeLongitude} 
+                            value={this.state.geometry.lng}
+                            />
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <input className="button" type="submit" value="Update GSHD" />
+              </form>
           </div>
-          <input type="submit" value="Update GSHD" />
-        </form>
+        </section>
       </div>
-
     )
   }
 }
