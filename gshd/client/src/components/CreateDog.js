@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AutoCompletePlaces from './AutoCompletePlaces.js';
 
 class CreateDog extends Component {
 
@@ -24,6 +25,7 @@ class CreateDog extends Component {
     this.onLatChange = this.onLatChange.bind(this);
     this.onLongChange = this.onLongChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onAutoCompletePlacesSelect = this.onAutoCompletePlacesSelect.bind(this);
   }
 
   onTitleChange(e) {
@@ -71,6 +73,21 @@ class CreateDog extends Component {
 
     newGeometry.lng = e.target.value;
 
+    this.setState({
+      geometry: newGeometry
+    });
+  }
+
+  onAutoCompletePlacesSelect(dataFromChild) {
+
+    console.log(dataFromChild);
+    const newGeometry = {
+      ...this.state.geometry
+    };
+
+    newGeometry.lng = dataFromChild.lng;
+    newGeometry.lat = dataFromChild.lat;
+    
     this.setState({
       geometry: newGeometry
     });
@@ -143,28 +160,8 @@ class CreateDog extends Component {
                   <div className="field">
                     <label className="label" htmlFor="location">Location</label>
                     <div className="control">
-                      <input 
-                        className="input" 
-                        type="text" 
-                        name="location" 
-                        placeholder="The Beach" 
-                        onChange={this.onLocationChange} 
-                        value={this.state.location}
-                        />
-                    </div>
-                  </div>
-
-                  <div className="field">
-                    <label className="label" htmlFor="rating">Rating out of 10</label>
-                    <div className="control">
-                      <input 
-                        className="input" 
-                        type="text" 
-                        name="rating" 
-                        placeholder="7" 
-                        onChange={this.onRatingChange} 
-                        value={this.state.rating}
-                        />
+                      <AutoCompletePlaces 
+                        selectionHandler={this.onAutoCompletePlacesSelect} />
                     </div>
                   </div>
                 </div>
@@ -185,29 +182,15 @@ class CreateDog extends Component {
                   </div>
 
                   <div className="field">
-                    <label className="label" htmlFor="latitude">Latitude</label>
+                    <label className="label" htmlFor="rating">Rating out of 10</label>
                     <div className="control">
                       <input 
                         className="input" 
                         type="text" 
-                        name="latitude" 
-                        placeholder="60" 
-                        onChange={this.onLatChange} 
-                        value={this.state.geometry.lat}
-                        />
-                    </div>
-                  </div>
-
-                  <div className="field">
-                    <label className="label" htmlFor="longitude">Longitude</label>
-                    <div className="control">
-                      <input 
-                        className="input" 
-                        type="text" 
-                        name="longitude" 
-                        placeholder="60" 
-                        onChange={this.onLongChange} 
-                        value={this.state.geometry.lng}
+                        name="rating" 
+                        placeholder="7" 
+                        onChange={this.onRatingChange} 
+                        value={this.state.rating}
                         />
                     </div>
                   </div>

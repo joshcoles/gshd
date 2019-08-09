@@ -19,8 +19,8 @@ class GoogleMap extends Component {
         initialCenter={{ lat: 49.2827, lng: -123.1207}}>
         {
           this.props.gshds.map((gshd, index) => {
-            const lat = this.props.gshds[index].gshd_geometry.coordinates[0];
-            const lng = this.props.gshds[index].gshd_geometry.coordinates[1];
+            const lng = this.props.gshds[index].gshd_geometry.coordinates[0];
+            const lat = this.props.gshds[index].gshd_geometry.coordinates[1];
             return (
               <Marker key={index} position={{ lat: lat, lng: lng }}/>
             )

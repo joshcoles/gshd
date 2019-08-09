@@ -36,7 +36,9 @@ class AutoCompletePlaces extends Component {
   onSelect = (address) => {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log(`Success:`, latLng))
+      .then(latLng => {
+        this.props.selectionHandler(latLng); 
+      })
       .catch(error => console.error(`Error: ${error}`));
   }
 
@@ -55,7 +57,7 @@ class AutoCompletePlaces extends Component {
                 <input
                   {...getInputProps({
                     placeholder: 'Search Places ...',
-                    className: 'location-search-input',
+                    className: 'location-search-input input',
                   })}
                 />
                 {loading && <div>Loading...</div>}
