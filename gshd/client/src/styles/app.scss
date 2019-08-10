@@ -78,4 +78,10 @@ form {
   input {
     margin-bottom: 10px;
   }
+
+  fieldset {
+    input {
+      display: none;
+    }
+  }
 }

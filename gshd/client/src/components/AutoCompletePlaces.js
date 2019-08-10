@@ -4,10 +4,10 @@ import PlacesAutoComplete, {
   getLatLng
 } from 'react-places-autocomplete';
 
-// https://www.npmjs.com/package/react-places-autocomplete
-
 class AutoCompletePlaces extends Component {
 
+  // 'Address' is the actual place name string, which can be converted
+  // into lat/lng using geoCodeByAddress method
   constructor(props) {
     super(props);
     this.state = {
@@ -16,30 +16,36 @@ class AutoCompletePlaces extends Component {
     }
   }
 
+  // Used to flag the point at which Google Maps is loaded on page
   initMap = () => {
     this.setState({
       gmapsLoaded: true,
     })
   }
   
+  // Include Google Maps script on page
   componentDidMount() {
-    window.initMap = this.initMap
-    const gmapScriptEl = document.createElement(`script`)
-    gmapScriptEl.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_TOKEN}&libraries=places&callback=initMap`
-    document.querySelector(`body`).insertAdjacentElement(`beforeend`, gmapScriptEl)
+    window.initMap = this.initMap;
+    const gmapScriptEl = document.createElement(`script`);
+    gmapScriptEl.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_TOKEN}&libraries=places&callback=initMap`;
+    document.querySelector('body').insertAdjacentElement('beforeend', gmapScriptEl);
   }
+
 
   onInputChange = (address) => {
     this.setState({ address });
   }
 
   onSelect = (address) => {
+
+    this.setState({ address });
+
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => {
-        this.props.selectionHandler(latLng); 
-      })
-      .catch(error => console.error(`Error: ${error}`));
+      .then(latLng => this.props.selectionHandler({latLng, address}))
+      .catch(error => console.error(`
+        Error when trying to get lat/lng: ${error}
+      `));
   }
 
   render() {
@@ -61,6 +67,7 @@ class AutoCompletePlaces extends Component {
                   })}
                 />
                 {loading && <div>Loading...</div>}
+                
                 {suggestions.map(suggestion => {
                   const className = suggestion.active
                     ? 'suggestion-item--active'

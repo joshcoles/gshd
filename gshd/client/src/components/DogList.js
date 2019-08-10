@@ -12,6 +12,7 @@ const Gshd = (props) => (
       <div className="media-content">
         <div className="content">
           <strong>{props.gshd.gshd_title}</strong>
+          <p>{props.gshd.gshd_location}</p>
           <br/>
           <Link to={`/edit-dog/${props.gshd._id}`}>Edit</Link>
         </div>

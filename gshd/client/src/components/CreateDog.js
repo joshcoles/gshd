@@ -41,9 +41,13 @@ class CreateDog extends Component {
   }
 
   onRatingChange(e) {
+
+
     this.setState({
       rating: e.target.value
     });
+
+    console.log(this.state.rating);
   }
 
   onImageChange(e) {
@@ -79,17 +83,17 @@ class CreateDog extends Component {
   }
 
   onAutoCompletePlacesSelect(dataFromChild) {
-
-    console.log(dataFromChild);
+    
     const newGeometry = {
       ...this.state.geometry
     };
 
-    newGeometry.lng = dataFromChild.lng;
-    newGeometry.lat = dataFromChild.lat;
+    newGeometry.lng = dataFromChild.latLng.lng;
+    newGeometry.lat = dataFromChild.latLng.lat;
     
     this.setState({
-      geometry: newGeometry
+      geometry: newGeometry,
+      location: dataFromChild.address
     });
   }
 
@@ -183,17 +187,40 @@ class CreateDog extends Component {
 
                   <div className="field">
                     <label className="label" htmlFor="rating">Rating out of 10</label>
-                    <div className="control">
-                      <input 
-                        className="input" 
-                        type="text" 
-                        name="rating" 
-                        placeholder="7" 
-                        onChange={this.onRatingChange} 
-                        value={this.state.rating}
-                        />
-                    </div>
+                    <fieldset onChange={this.onRatingChange} className="rating">
+                      <label htmlFor="star5" title="5 stars">
+                        <span className="icon">
+                          <i className="fas fa-star"></i>
+                        </span>
+                      </label>
+                      <input type="radio" id="star5" name="rating" value="5" />
+                      <label htmlFor="star4" title="4 stars">
+                        <span className="icon">
+                          <i className="fas fa-star"></i>
+                        </span>
+                      </label>
+                      <input type="radio" id="star4" name="rating" value="4" />
+                      <label htmlFor="star3" title="3 stars">
+                        <span className="icon">
+                          <i className="fas fa-star"></i>
+                        </span>
+                      </label>
+                      <input type="radio" id="star3" name="rating" value="3" />
+                      <label htmlFor="star2" title="2 stars">
+                        <span className="icon">
+                          <i className="fas fa-star"></i>
+                        </span>
+                      </label>
+                      <input type="radio" id="star2" name="rating" value="2" />
+                      <label htmlFor="star1" title="1 stars">
+                        <span className="icon">
+                          <i className="fas fa-star"></i>
+                        </span>
+                      </label>
+                      <input type="radio" id="star1" name="rating" value="1" />
+                    </fieldset>
                   </div>
+
                 </div>
               </div>
               <input className="button" type="submit" value="Create Dog"/>
