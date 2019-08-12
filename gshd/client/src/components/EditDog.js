@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AutoCompletePlaces from './AutoCompletePlaces.js';
 
 class EditDog extends Component {
 
@@ -9,7 +10,7 @@ class EditDog extends Component {
     this.state = {
       title: '',
       location: '',
-      rating: 0,
+      rating: '',
       image: '',
       geometry: {
         lat: '',
@@ -24,6 +25,7 @@ class EditDog extends Component {
     this.onChangeLatitude = this.onChangeLatitude.bind(this);
     this.onChangeLongitude = this.onChangeLongitude.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onAutoCompletePlacesSelect = this.onAutoCompletePlacesSelect.bind(this);
     
   }
 
@@ -56,10 +58,6 @@ class EditDog extends Component {
         coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat),]
       }
     }
-
-    console.log("Firing");
-
-    console.log(`http://localhost:4000/gshds/update/${this.props.match.params.id}`);
 
     axios.post(`http://localhost:4000/gshds/update/${this.props.match.params.id}`, obj)
       .then(res => console.log(res.data))
@@ -107,6 +105,21 @@ class EditDog extends Component {
   }
 
 
+  onAutoCompletePlacesSelect(dataFromChild) {
+    
+    const newGeometry = {
+      ...this.state.geometry
+    };
+
+    newGeometry.lng = dataFromChild.latLng.lng;
+    newGeometry.lat = dataFromChild.latLng.lat;
+    
+    this.setState({
+      geometry: newGeometry,
+      location: dataFromChild.address
+    });
+  }
+
   render() {
 
     return (
@@ -135,26 +148,8 @@ class EditDog extends Component {
                       <div className="field">
                         <label className="label" htmlFor="location">Location</label>
                         <div className="control">
-                          <input 
-                            className="input" 
-                            type="text" 
-                            name="location" 
-                            onChange={this.onChangeLocation} 
-                            value={this.state.location}
-                            />
-                        </div>
-                      </div>
-
-                      <div className="field">
-                        <label className="label" htmlFor="rating">Rating</label>
-                        <div className="control">
-                          <input 
-                            className="input" 
-                            type="text" 
-                            name="rating" 
-                            onChange={this.onChangeRating} 
-                            value={this.state.rating}
-                            />
+                          <AutoCompletePlaces 
+                            selectionHandler={this.onAutoCompletePlacesSelect} />
                         </div>
                       </div>
                     </div>
@@ -172,32 +167,28 @@ class EditDog extends Component {
                             />
                         </div>
                       </div>
+                      <div className="field star-ratings">
+                        <label className="label" htmlFor="rating">Rating</label>
+                        <fieldset onChange={this.onChangeRating} className="rating">
+                        {
+                            [5, 4, 3, 2, 1].map((number, index) => {
+                              const ratingNumber = number;
+                              const idAndHtmlFor = `star${ratingNumber}`;
+                              const title = `${ratingNumber} stars`;
 
-                      <div className="field">
-                        <label className="label" htmlFor="latitude">Latitude</label>
-                        <div className="control">
-                          <input 
-                            className="input" 
-                            type="text" 
-                            name="latitude" 
-                            onChange={this.onChangeLatitude} 
-                            value={this.state.geometry.lat}
-                            />
-                        </div>
-                      </div>
-
-
-                      <div className="field">
-                        <label className="label" htmlFor="longitude">Longitude</label>
-                        <div className="control">
-                          <input 
-                            className="input" 
-                            type="text" 
-                            name="longitude" 
-                            onChange={this.onChangeLongitude} 
-                            value={this.state.geometry.lng}
-                            />
-                        </div>
+                              return (
+                                <React.Fragment>
+                                  <input defaultChecked={this.state.rating === ratingNumber} type="radio" id={idAndHtmlFor} name="rating" value={ratingNumber} />
+                                  <label htmlFor={idAndHtmlFor} title={title}>
+                                    <span className="icon">
+                                      <i className="fas fa-star tee-hee"></i>
+                                    </span>
+                                  </label>
+                                </React.Fragment>
+                              );
+                            })
+                          }
+                        </fieldset>
                       </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ class CreateDog extends Component {
     this.state = {
       title: '',
       location: '',
-      rating: 0,
+      rating: '',
       image: '',
       geometry: {
         lat: '',
@@ -44,9 +44,8 @@ class CreateDog extends Component {
     
     this.setState({
       rating: e.target.value
-    }, () => {
-      console.log(this.state.rating);
     });
+    
   }
 
   onImageChange(e) {
@@ -128,7 +127,7 @@ class CreateDog extends Component {
     this.setState({
       title: '',
       location: '',
-      rating: 0,
+      rating: '',
       image: '',
       geometry: {
         lat: '',
