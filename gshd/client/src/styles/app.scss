@@ -67,7 +67,7 @@ nav {
 }
 
 .map-container {
-  height: 100%;
+  height: calc(75vh);
   position: relative;
   width: 100%;
 }
@@ -79,9 +79,41 @@ form {
     margin-bottom: 10px;
   }
 
-  fieldset {
-    input {
-      display: none;
+
+  /* Star ratings */
+  .star-ratings {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  
+    fieldset {
+      padding: 0;
+
+      input {
+        display: none;
+      }
+  
+      &:not(:hover) {
+        input[type=radio]:checked ~ label {
+          path {
+            fill: $star-color-active;
+          }
+        }
+      }
+  
+      input + label {
+        cursor: pointer;
+        float: right;
+        margin-right: 0;
+      }
+  
+      label:hover, 
+      label:hover ~ label {
+        path {
+          fill: $star-color-hover;
+        }
+      }
+  
     }
   }
 }
