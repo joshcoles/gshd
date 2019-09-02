@@ -27,6 +27,9 @@ let gshd = new Schema({
   gshd_image: {
     type: String
   },
+  gshd_date: {
+    type: Date
+  },
   gshd_geometry: gshd_location
 });
 

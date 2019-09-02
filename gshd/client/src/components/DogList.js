@@ -3,23 +3,34 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Map from './Map.js';
 
-const Gshd = (props) => (
-  <li className="box">
-    <div className="media">
-      <div className="media-left">
-        <figure className="image is-64x64"><img src={props.gshd.gshd_image} alt="A hot dog"/></figure>
-      </div>
-      <div className="media-content">
-        <div className="content">
-          <strong>{props.gshd.gshd_title}</strong>
-          <p>{props.gshd.gshd_location}</p>
-          <br/>
-          <Link to={`/edit-dog/${props.gshd._id}`}>Edit</Link>
+const Gshd = (props) => {
+  let dateString;
+
+  if (props.gshd.gshd_date) {
+    dateString = props.gshd.gshd_date.split('T')[0];
+  }
+
+  return (
+    <li className="box">
+      <div className="media">
+        <div className="media-left">
+          <figure className="image is-64x64"><img src={props.gshd.gshd_image} alt="A hot dog"/></figure>
+        </div>
+        <div className="media-content">
+          <div className="content">
+            <strong>{props.gshd.gshd_title}</strong>
+            <p>{props.gshd.gshd_location}</p>
+            <br/>
+            <div className="bottom-info">
+              <Link to={`/edit-dog/${props.gshd._id}`}>Edit</Link>
+              <span>{ dateString ? dateString : '' }</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </li>
-)
+    </li>
+  );
+}
 
 class DogList extends Component {
 
@@ -28,12 +39,15 @@ class DogList extends Component {
     
     this.state = {
       gshds: []
-    }
+    };
   }
 
   componentDidMount() {
     axios.get('http://localhost:4000/gshds/')
       .then(response => {
+
+        console.log(response.data);
+
         this.setState({
           gshds: response.data
         })
@@ -51,12 +65,10 @@ class DogList extends Component {
 
     return (
       <section className="section">
-
         <div className="container">
           <h1>Your Gretzky-Style Hot Dogs</h1>
-
           <div className="columns">
-            <div className="column is-one-third">
+            <div className="column is-one-third dog-list-cards">
               <ul>
                 {this.dogList()}
               </ul>

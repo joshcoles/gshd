@@ -93,6 +93,7 @@ gshdRoutes.route('/update/:id').post((req, res) => {
       gshd.gshd_location = req.body.gshd_location;
       gshd.gshd_rating = req.body.gshd_rating;
       gshd.gshd_image = req.body.gshd_image;
+      gshd.gshd_date = req.body.gshd_date;
 
       gshd.save().then(gshd => {
         res.json('GSHD Updated');

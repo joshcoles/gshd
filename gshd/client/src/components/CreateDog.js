@@ -109,6 +109,7 @@ class CreateDog extends Component {
       image: ${this.state.image}
       lat: ${this.state.geometry.lat}
       long: ${this.state.geometry.lng}
+      date: ${Date.now()}
     `);
 
     const newGshd = {
@@ -116,6 +117,7 @@ class CreateDog extends Component {
       gshd_location: this.state.location,
       gshd_rating: this.state.rating,
       gshd_image: this.state.image,
+      gshd_date: Date.now(),
       gshd_geometry: {
         coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat)]
       }
@@ -129,6 +131,7 @@ class CreateDog extends Component {
       location: '',
       rating: '',
       image: '',
+      gshd_date: '',
       geometry: {
         lat: '',
         lng: ''
