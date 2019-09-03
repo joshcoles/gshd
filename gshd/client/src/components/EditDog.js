@@ -181,7 +181,7 @@ class EditDog extends Component {
                                   <input defaultChecked={this.state.rating === ratingNumber} type="radio" id={idAndHtmlFor} name="rating" value={ratingNumber} />
                                   <label htmlFor={idAndHtmlFor} title={title}>
                                     <span className="icon">
-                                      <i className="fas fa-star tee-hee"></i>
+                                      <i className="fas fa-star"></i>
                                     </span>
                                   </label>
                                 </React.Fragment>

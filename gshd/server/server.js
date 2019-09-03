@@ -105,6 +105,20 @@ gshdRoutes.route('/update/:id').post((req, res) => {
   });
 });
 
+gshdRoutes.route('/delete/:id').delete((req, res) => {
+  GSHD
+    .findByIdAndDelete(req.params.id)
+    .exec()
+    .then(doc => {
+      if (!doc) {
+        return res.status(404).end();
+      }
+
+      return res.status(204).end();
+    })
+      .catch(error => console.log(error));
+});
+
 app.use('/gshds', gshdRoutes);
 
 app.listen(PORT,() => {

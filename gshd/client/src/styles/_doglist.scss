@@ -1,6 +1,13 @@
 .dog-list-cards {
-  .bottom-info {
+  .bottom-info,
+  .top-info {
     display: flex;
     justify-content: space-between;
+  }
+
+  .top-info {
+    .icon {
+      cursor: pointer;
+    }
   }
 }
