@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AutoCompletePlaces from './AutoCompletePlaces.js';
+import AutoCompletePlaces from './utils/AutoCompletePlaces.js';
+import Star from './ui/Star.js';
 
 class EditDog extends Component {
 
@@ -121,7 +122,6 @@ class EditDog extends Component {
   }
 
   render() {
-
     return (
       <div>
         <section className="section">
@@ -170,14 +170,14 @@ class EditDog extends Component {
                       <div className="field star-ratings">
                         <label className="label" htmlFor="rating">Rating</label>
                         <fieldset onChange={this.onChangeRating} className="rating">
-                        {
+                        {/* {
                             [5, 4, 3, 2, 1].map((number, index) => {
                               const ratingNumber = number;
                               const idAndHtmlFor = `star${ratingNumber}`;
                               const title = `${ratingNumber} stars`;
 
                               return (
-                                <React.Fragment>
+                                <React.Fragment key={index}>
                                   <input defaultChecked={this.state.rating === ratingNumber} type="radio" id={idAndHtmlFor} name="rating" value={ratingNumber} />
                                   <label htmlFor={idAndHtmlFor} title={title}>
                                     <span className="icon">
@@ -187,6 +187,12 @@ class EditDog extends Component {
                                 </React.Fragment>
                               );
                             })
+                          } */}
+
+                          {
+                            [5, 4, 3, 2, 1].map((number) =>
+                              <Star number={number} currentRating={this.state.rating ? this.state.rating : 0} key={number} />
+                            )
                           }
                         </fieldset>
                       </div>
