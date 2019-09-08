@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AutoCompletePlaces from './utils/AutoCompletePlaces.js';
-import Stars from './ui/Stars.js';
+import AutoCompletePlaces from '../utils/AutoCompletePlaces.js';
+import Stars from '../ui/Stars.js';
 
-class CreateDog extends Component {
+class CreateGSHD extends Component {
 
   constructor(props) {
     super(props);
@@ -136,7 +136,7 @@ class CreateDog extends Component {
     return (
       <div>
         <section className="section">
-          <h1>CreateDog</h1>
+          <h1>CreateGSHD</h1>
           <div className="container columns">
             <form className="column" onSubmit={this.onSubmit}>
               <div className="container columns">
@@ -187,7 +187,7 @@ class CreateDog extends Component {
                   </div>
                 </div>
               </div>
-              <input className="button" type="submit" value="Create Dog"/>
+              <input className="button" type="submit" value="Create GSHD"/>
             </form>
           </div>
         </section>
@@ -196,4 +196,4 @@ class CreateDog extends Component {
   }
 }
 
-export default CreateDog;
+export default CreateGSHD;

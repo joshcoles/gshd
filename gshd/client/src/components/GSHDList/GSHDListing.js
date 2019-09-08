@@ -45,7 +45,7 @@ class DogListing extends Component {
             <p>{this.props.gshd.gshd_location}</p>
             <br/>
             <div className="bottom-info">
-              <Link to={`/edit-dog/${this.props.gshd._id}`}>Edit</Link>
+              <Link to={`/edit-gshd/${this.props.gshd._id}`}>Edit</Link>
               <span>{ dateString ? dateString : '' }</span>
             </div>
           </div>

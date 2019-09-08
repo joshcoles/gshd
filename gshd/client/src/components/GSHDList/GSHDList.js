@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Map from './Map.js';
-import DogListing from './DogListing.js';
+import Map from '../Map/Map.js';
+import GSHDListing from './GSHDListing.js';
 
 class DogList extends Component {
 
@@ -45,7 +45,7 @@ class DogList extends Component {
           <div className="columns">
             <div className="column is-one-third dog-list-cards">
               <ul>
-                {this.state.gshds.map((gshd, index) => <DogListing gshd={gshd} key={index} handleUpdates={this.fetchUpdatedDogList} />)}
+                {this.state.gshds.map((gshd, index) => <GSHDListing gshd={gshd} key={index} handleUpdates={this.fetchUpdatedDogList} />)}
               </ul>
             </div>
             <div className="column is-two-thirds">

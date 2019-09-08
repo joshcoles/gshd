@@ -11,7 +11,7 @@ const googleMapsApiToken = process.env.REACT_APP_GOOGLE_MAPS_API_TOKEN;
 
 class GoogleMap extends Component {
     render(props) {
-  
+      
     return (
       <Map
         google={this.props.google}

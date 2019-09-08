@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AutoCompletePlaces from './utils/AutoCompletePlaces.js';
-import Stars from './ui/Stars.js';
+import AutoCompletePlaces from '../utils/AutoCompletePlaces.js';
+import Stars from '../ui/Stars.js';
 
-class EditDog extends Component {
+class EditGSHD extends Component {
 
   constructor(props) {
     super(props);
@@ -185,4 +185,4 @@ class EditDog extends Component {
   }
 }
 
-export default EditDog;
+export default EditGSHD;

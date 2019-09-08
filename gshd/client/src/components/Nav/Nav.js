@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import icon from '../images/gshd.png';
+import icon from '../../images/gshd.png';
 
 class Nav extends Component {
   
@@ -20,8 +20,8 @@ class Nav extends Component {
           </div>
           <div className="navbar-menu">
             <div className="navbar-start">
-              <Link className="navbar-item" to="/dog-list">My Dogs</Link>
-              <Link className="navbar-item" to="/create-dog">Create Dog</Link>
+              <Link className="navbar-item" to="/gshds">My GSHDs</Link>
+              <Link className="navbar-item" to="/create-gshd">Create GSHD</Link>
             </div>
             <div className="navbar-end">
               <div className="navbar-item">

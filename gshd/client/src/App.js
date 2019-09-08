@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './styles/app.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import DogList from './components/DogList.js';
-import LandingPage from './components/LandingPage.js';
-import EditDog from './components/EditDog.js';
-import CreateDog from './components/CreateDog.js'
-import Nav from './components/Nav.js';
+import GSHDList from './components/GSHDList/GSHDList.js';
+import LandingPage from './components/LandingPage/LandingPage.js';
+import EditGSHD from './components/EditGSHD/EditGSHD.js';
+import CreateGSHD from './components/CreateGSHD/CreateGSHD.js';
+import Nav from './components/Nav/Nav.js';
 
 class App extends Component {
 
@@ -19,9 +19,9 @@ class App extends Component {
         </div>
 
         <Route path="/" exact component={LandingPage}/>
-        <Route path="/dog-list" component={DogList}/>
-        <Route path="/create-dog" component={CreateDog}/>
-        <Route path="/edit-dog/:id" component={EditDog}/>
+        <Route path="/gshds" component={GSHDList}/>
+        <Route path="/create-gshd" component={CreateGSHD}/>
+        <Route path="/edit-gshd/:id" component={EditGSHD}/>
       </Router>
     );
   }
