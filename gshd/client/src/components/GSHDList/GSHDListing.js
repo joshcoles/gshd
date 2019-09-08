@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-class DogListing extends Component {
+class GSHDListing extends Component {
 
   constructor(props) {
     super(props);
@@ -58,4 +58,4 @@ class DogListing extends Component {
 
 }
 
-export default DogListing;
+export default GSHDListing;

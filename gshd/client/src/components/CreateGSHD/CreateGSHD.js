@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AutoCompletePlaces from '../utils/AutoCompletePlaces.js';
+import AutoCompletePlaces from '../utils/AutoCompletePlaces/AutoCompletePlaces.js';
 import Stars from '../ui/Stars.js';
 
 class CreateGSHD extends Component {
@@ -19,42 +19,34 @@ class CreateGSHD extends Component {
       }
     }
 
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onLocationChange = this.onLocationChange.bind(this);
-    this.onRatingChange = this.onRatingChange.bind(this);
-    this.onImageChange = this.onImageChange.bind(this);
-    this.onLatChange = this.onLatChange.bind(this);
-    this.onLongChange = this.onLongChange.bind(this);
+    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeRating = this.onChangeRating.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
+    this.onChangeLatitude = this.onChangeLatitude.bind(this);
+    this.onChangeLongitude = this.onChangeLongitude.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onAutoCompletePlacesSelect = this.onAutoCompletePlacesSelect.bind(this);
   }
 
-  onTitleChange(e) {
+  onChangeTitle(e) {
     this.setState({
       title: e.target.value
     });
   }
 
-  onLocationChange(e) {
-    this.setState({
-      location: e.target.value
-    });
-  }
-
-  onRatingChange(e) {
-    console.log(e.target);
+  onChangeRating(e) {
     this.setState({
       rating: e.target.value
     });
   }
 
-  onImageChange(e) {
+  onChangeImage(e) {
     this.setState({
       image: e.target.value
     });
   }
 
-  onLatChange(e) {
+  onChangeLatitude(e) {
 
     const newGeometry = {
       ...this.state.geometry
@@ -67,7 +59,7 @@ class CreateGSHD extends Component {
     });
   }
 
-  onLongChange(e) {
+  onChangeLongitude(e) {
 
     const newGeometry = {
       ...this.state.geometry
@@ -112,7 +104,7 @@ class CreateGSHD extends Component {
     axios.post('http://localhost:4000/gshds/add', newGshd)
       .then(res => console.log(res.data))
       .then(() => {
-        this.props.history.push('/dog-list');
+        this.props.history.push('/gshds');
       });
 
     this.setState({
@@ -127,12 +119,12 @@ class CreateGSHD extends Component {
       }
     });
 
-
   }
 
   render() {
 
-    console.log(this.state);
+    const stars = <Stars onRatingChange={this.onChangeRating} mutable={true} rating={this.state.rating}/>;
+
     return (
       <div>
         <section className="section">
@@ -149,7 +141,7 @@ class CreateGSHD extends Component {
                         type="text" 
                         name="title" 
                         placeholder="Memorial Day All-Timer" 
-                        onChange={this.onTitleChange} 
+                        onChange={this.onChangeTitle} 
                         value={this.state.title}
                         />
                     </div>
@@ -173,7 +165,7 @@ class CreateGSHD extends Component {
                         type="text" 
                         name="image" 
                         placeholder="https://www.imgur.com/gshd" 
-                        onChange={this.onImageChange} 
+                        onChange={this.onChangeImage} 
                         value={this.state.image}
                         />
                     </div>
@@ -181,9 +173,7 @@ class CreateGSHD extends Component {
 
                   <div className="field star-ratings">
                     <label className="label" htmlFor="rating">Rating</label>
-                    {
-                      <Stars onRatingChange={this.onRatingChange} mutable={true} rating={this.state.rating}/>
-                    }
+                    { stars }
                   </div>
                 </div>
               </div>

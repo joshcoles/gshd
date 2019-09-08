@@ -3,7 +3,7 @@ import axios from 'axios';
 import Map from '../Map/Map.js';
 import GSHDListing from './GSHDListing.js';
 
-class DogList extends Component {
+class GSHDList extends Component {
 
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class DogList extends Component {
       gshds: []
     };
 
-    this.fetchUpdatedDogList = this.fetchUpdatedDogList.bind(this);
+    this.fetchUpdatedGSHDList = this.fetchUpdatedGSHDList.bind(this);
 
   }
 
@@ -26,7 +26,7 @@ class DogList extends Component {
       .catch(error => console.log(error));
   }
 
-  fetchUpdatedDogList() {
+  fetchUpdatedGSHDList() {
     axios.get('http://localhost:4000/gshds/')
       .then(response => {
         this.setState({
@@ -60,4 +60,4 @@ class DogList extends Component {
   }
 }
 
-export default DogList;
+export default GSHDList;

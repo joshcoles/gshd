@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AutoCompletePlaces from '../utils/AutoCompletePlaces.js';
+import AutoCompletePlaces from '../utils/AutoCompletePlaces/AutoCompletePlaces.js';
 import Stars from '../ui/Stars.js';
 
 class EditGSHD extends Component {
@@ -65,7 +65,7 @@ class EditGSHD extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
 
-    this.props.history.push('/dog-list');
+    this.props.history.push('/gshds');
   }
 
   onChangeTitle(e) {
