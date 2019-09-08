@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import AutoCompletePlaces from './utils/AutoCompletePlaces.js';
-import Star from './ui/Star.js';
+import Stars from './ui/Stars.js';
 
 class EditDog extends Component {
 
@@ -33,6 +33,7 @@ class EditDog extends Component {
   componentDidMount() {
     axios.get(`http://localhost:4000/gshds/${this.props.match.params.id}`)
       .then(res => {
+        console.log(res);
         this.setState({
           title: res.data.gshd_title,
           location: res.data.gshd_location,
@@ -169,32 +170,9 @@ class EditDog extends Component {
                       </div>
                       <div className="field star-ratings">
                         <label className="label" htmlFor="rating">Rating</label>
-                        <fieldset onChange={this.onChangeRating} className="rating">
-                        {/* {
-                            [5, 4, 3, 2, 1].map((number, index) => {
-                              const ratingNumber = number;
-                              const idAndHtmlFor = `star${ratingNumber}`;
-                              const title = `${ratingNumber} stars`;
-
-                              return (
-                                <React.Fragment key={index}>
-                                  <input defaultChecked={this.state.rating === ratingNumber} type="radio" id={idAndHtmlFor} name="rating" value={ratingNumber} />
-                                  <label htmlFor={idAndHtmlFor} title={title}>
-                                    <span className="icon">
-                                      <i className="fas fa-star"></i>
-                                    </span>
-                                  </label>
-                                </React.Fragment>
-                              );
-                            })
-                          } */}
-
-                          {
-                            [5, 4, 3, 2, 1].map((number) =>
-                              <Star number={number} currentRating={this.state.rating ? this.state.rating : 0} key={number} />
-                            )
-                          }
-                        </fieldset>
+                        {
+                          <Stars onRatingChange={this.onChangeRating} mutable={true} rating={this.state.rating}/>
+                        }
                       </div>
                     </div>
                 </div>

@@ -1,0 +1,37 @@
+@import 'variables';
+
+.star-ratings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+
+  .immutable {
+    pointer-events: none;
+  }
+
+    input {
+      display: none;
+    }
+
+    &:not(:hover) {
+      input[type=radio]:checked ~ label {
+        path {
+          fill: $star-color-active;
+        }
+      }
+    }
+
+    input + label {
+      cursor: pointer;
+      float: right;
+      margin-right: 0;
+    }
+
+    label:hover, 
+    label:hover ~ label {
+      path {
+        fill: $star-color-hover;
+      }
+    }
+}

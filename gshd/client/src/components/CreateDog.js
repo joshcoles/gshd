@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import AutoCompletePlaces from './utils/AutoCompletePlaces.js';
-import Star from './ui/Star.js';
+import Stars from './ui/Stars.js';
 
 class CreateDog extends Component {
 
@@ -42,6 +42,7 @@ class CreateDog extends Component {
   }
 
   onRatingChange(e) {
+    console.log(e.target);
     this.setState({
       rating: e.target.value
     });
@@ -109,7 +110,10 @@ class CreateDog extends Component {
     }
 
     axios.post('http://localhost:4000/gshds/add', newGshd)
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data))
+      .then(() => {
+        this.props.history.push('/dog-list');
+      });
 
     this.setState({
       title: '',
@@ -122,9 +126,13 @@ class CreateDog extends Component {
         lng: ''
       }
     });
+
+
   }
 
   render() {
+
+    console.log(this.state);
     return (
       <div>
         <section className="section">
@@ -173,15 +181,10 @@ class CreateDog extends Component {
 
                   <div className="field star-ratings">
                     <label className="label" htmlFor="rating">Rating</label>
-                    <fieldset onChange={this.onRatingChange} className="rating">
                     {
-                      [5, 4, 3, 2, 1].map((number) =>
-                        <Star number={number} currentRating={this.state.rating ? this.state.rating : 0} key={number} />
-                      )
+                      <Stars onRatingChange={this.onRatingChange} mutable={true} rating={this.state.rating}/>
                     }
-                    </fieldset>
                   </div>
-
                 </div>
               </div>
               <input className="button" type="submit" value="Create Dog"/>

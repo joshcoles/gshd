@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Stars from './ui/Stars.js';
 
 class LandingPage extends Component {
 
@@ -14,7 +15,7 @@ class LandingPage extends Component {
     }
   }
 
-  render(props) {
+  render() {
     
     return (
       <div className="landing-page">
@@ -22,6 +23,9 @@ class LandingPage extends Component {
           <div className="hero-body">
             <div className="container">
               <h1 className="title">Gretzky-Style Hot Dog</h1>
+
+              <Stars rating={3} mutable={false} />
+                
               <h2 className="subtitle">An ode to Wayne Gretzky's strange eating habits.</h2>
             </div>
           </div>

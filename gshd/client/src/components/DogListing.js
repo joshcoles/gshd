@@ -7,7 +7,6 @@ class DogListing extends Component {
   constructor(props) {
     super(props);
     
-
     this.deleteGSHD = this.deleteGSHD.bind(this);
   }
 
@@ -36,7 +35,9 @@ class DogListing extends Component {
         <div className="media-content">
           <div className="content">
             <div className="top-info">
-              <strong>{this.props.gshd.gshd_title}</strong>
+              <div className="top-info-left">
+                <strong>{this.props.gshd.gshd_title}</strong>
+              </div>
               <span className="icon" onClick={this.deleteGSHD}>
                 <i className="fas fa-window-close"></i>
               </span>
