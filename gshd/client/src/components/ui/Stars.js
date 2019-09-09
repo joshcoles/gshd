@@ -14,8 +14,6 @@ class Stars extends Component {
   
     const rating = this.state.rating;
 
-    console.log(rating);
-
     return (
       <fieldset onChange={this.props.onRatingChange} className={`${this.props.mutable ? 'mutable' : 'immutable'}`}>
           <input defaultChecked={rating === 5} type="radio" id="star5" name="rating" value={5} />

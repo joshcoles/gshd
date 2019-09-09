@@ -7,11 +7,15 @@ const PORT = 4000;
 const gshdRoutes = express.Router();
 const mongoose = require('mongoose');
 const GSHD = require('./gshd.model');
+const fileUpload = require('express-fileupload');
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(fileUpload());
 
+
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://127.0.0.1:27017/gshd', ({ useNewUrlParser: true }));
 const connection = mongoose.connection;
 
@@ -83,6 +87,10 @@ gshdRoutes.route('/add').post((req, res) => {
     });
 });
 
+
+// ---------------------------------------------
+// POST /update/:id
+// ---------------------------------------------
 gshdRoutes.route('/update/:id').post((req, res) => {
   let id = req.params.id;
   GSHD.findById(id, (err, gshd) => {
@@ -105,6 +113,9 @@ gshdRoutes.route('/update/:id').post((req, res) => {
   });
 });
 
+// ---------------------------------------------
+// DELETE /delete/:id
+// ---------------------------------------------
 gshdRoutes.route('/delete/:id').delete((req, res) => {
   GSHD
     .findByIdAndDelete(req.params.id)
@@ -117,6 +128,15 @@ gshdRoutes.route('/delete/:id').delete((req, res) => {
       return res.status(204).end();
     })
       .catch(error => console.log(error));
+});
+
+
+// ---------------------------------------------
+// POST /upload/
+// ---------------------------------------------
+app.post('/upload', (req, res) => {
+  console.log(req.files);
+  res.json('Success');
 });
 
 app.use('/gshds', gshdRoutes);

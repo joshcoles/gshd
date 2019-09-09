@@ -21,9 +21,9 @@ class CreateGSHD extends Component {
 
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeRating = this.onChangeRating.bind(this);
-    this.onChangeImage = this.onChangeImage.bind(this);
     this.onChangeLatitude = this.onChangeLatitude.bind(this);
     this.onChangeLongitude = this.onChangeLongitude.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onAutoCompletePlacesSelect = this.onAutoCompletePlacesSelect.bind(this);
   }
@@ -168,6 +168,7 @@ class CreateGSHD extends Component {
                         onChange={this.onChangeImage} 
                         value={this.state.image}
                         />
+
                     </div>
                   </div>
 
