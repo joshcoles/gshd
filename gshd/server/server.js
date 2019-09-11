@@ -13,6 +13,9 @@ const fileUpload = require('express-fileupload');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(fileUpload());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 
 mongoose.set('useCreateIndex', true);
@@ -135,8 +138,9 @@ gshdRoutes.route('/delete/:id').delete((req, res) => {
 // POST /upload/
 // ---------------------------------------------
 app.post('/upload', (req, res) => {
+
   console.log(req.files);
-  res.json('Success');
+  
 });
 
 app.use('/gshds', gshdRoutes);
