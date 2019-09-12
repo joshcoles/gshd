@@ -8,6 +8,8 @@ const gshdRoutes = express.Router();
 const mongoose = require('mongoose');
 const GSHD = require('./gshd.model');
 const fileUpload = require('express-fileupload');
+const upload = require('./services/file-upload.js');
+const singleUpload = upload.single('testImage');
 
 // Middleware
 app.use(cors());
@@ -140,7 +142,15 @@ gshdRoutes.route('/delete/:id').delete((req, res) => {
 app.post('/upload', (req, res) => {
 
   console.log(req.files);
-  
+
+
+  singleUpload(req.files[0], res, (err) => {
+    
+    return res.json({
+      'imageUrl': req.file.location
+    });
+  });
+
 });
 
 app.use('/gshds', gshdRoutes);

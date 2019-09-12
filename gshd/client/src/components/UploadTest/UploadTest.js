@@ -35,15 +35,18 @@ class UploadTest extends Component {
 
     let formData = new FormData();
 
-    formData.append('image', this.state.image);
+    formData.append('testImage', this.state.image);
+    console.log(this.state.image);
+
+    console.log(formData.entries());
 
     axios.post('http://localhost:4000/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
-    .then(res => console.log(res)
-    .err(err => console.log(err)));
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
     
   }
 
@@ -52,7 +55,7 @@ class UploadTest extends Component {
       <div className="section">
         <div className="container">
           <form ref='uploadForm' id='uploadForm' encType="multipart/form-data">
-            <input onChange={this.onChangeImage} type="file" name="sampleFile" />
+            <input onChange={this.onChangeImage} type="file" name="testImage" />
             <input onClick={this.onSubmitImage} type='submit' value='Upload!' />
           </form>
         </div>
