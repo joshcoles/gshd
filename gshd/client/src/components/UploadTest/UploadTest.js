@@ -19,11 +19,6 @@ class UploadTest extends Component {
   onChangeImage(e) {
 
     const file = e.target.files[0];
-    
-
-    // axios.post('http://localhost:4000/upload', {
-
-    // });
 
     this.setState({
       image: file
@@ -35,10 +30,7 @@ class UploadTest extends Component {
 
     let formData = new FormData();
 
-    formData.append('testImage', this.state.image);
-    console.log(this.state.image);
-
-    console.log(formData.entries());
+    formData.append('gshd-image', this.state.image);
 
     axios.post('http://localhost:4000/upload', formData, {
       headers: {
@@ -47,15 +39,14 @@ class UploadTest extends Component {
     })
     .then(res => console.log(res))
     .catch(err => console.log(err));
-    
   }
 
   render() {
     return (
       <div className="section">
         <div className="container">
-          <form ref='uploadForm' id='uploadForm' encType="multipart/form-data">
-            <input onChange={this.onChangeImage} type="file" name="testImage" />
+          <form method="post" ref='uploadForm' id='uploadForm' encType="multipart/form-data">
+            <input onChange={this.onChangeImage} type="file" name="gshd-image" />
             <input onClick={this.onSubmitImage} type='submit' value='Upload!' />
           </form>
         </div>

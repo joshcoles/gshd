@@ -7,18 +7,16 @@ const PORT = 4000;
 const gshdRoutes = express.Router();
 const mongoose = require('mongoose');
 const GSHD = require('./gshd.model');
-const fileUpload = require('express-fileupload');
+
 const upload = require('./services/file-upload.js');
-const singleUpload = upload.single('testImage');
+const singleUpload = upload.single('gshd-image');
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(fileUpload());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-
 
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://127.0.0.1:27017/gshd', ({ useNewUrlParser: true }));
@@ -136,21 +134,18 @@ gshdRoutes.route('/delete/:id').delete((req, res) => {
 });
 
 
+/* Temporary route to be used while figuring out image uploads to AWS S3 */
+
 // ---------------------------------------------
 // POST /upload/
 // ---------------------------------------------
 app.post('/upload', (req, res) => {
 
-  console.log(req.files);
-
-
-  singleUpload(req.files[0], res, (err) => {
-    
+  singleUpload(req, res, (err) => {
     return res.json({
       'imageUrl': req.file.location
     });
   });
-
 });
 
 app.use('/gshds', gshdRoutes);

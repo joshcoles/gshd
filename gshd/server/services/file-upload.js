@@ -1,32 +1,45 @@
-const aws = require('aws-sdk');
-const multer = require('multer');
-const multerS3 = require('multer-s3');
-var findConfig = require('find-config');
-
 // Use findConfig package to find closest .env in parent directory
-require('dotenv').config({ 
-  path: findConfig('.env') 
-});
+const dotenv = require('dotenv');
+const findConfig = require('find-config');
+dotenv.config({ path: findConfig('.env') });
 
+// Access S3 Class on AWS SDK
+const aws = require('aws-sdk');
 const s3 = new aws.S3();
 
+// Middleware for handling multipart/form-data
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+
+// Pass credentials through to AWS before performing any actions
 aws.config.update({
   secretAccessKey: process.env.AWS_ACCESS_KEY_ID,
   accessKeyId: process.env.AWS_SECRET_ACCESS_KEY,
   region: 'us-east-2'
 });  
 
+const bucketName = 'gshd-images';
+const metaDataString = '';
+
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'gshd-images',
+    bucket: bucketName,
+    key: function(req, file, cb) {
+
+      const currentDay = new Date();
+      const day = currentDay.getDate();
+      const month = currentDay.getMonth();
+      const year = currentDay.getFullYear();
+      const randomInt = Math.floor(Math.random() * 100000000);
+
+      // Pass dynamic name for image based on date for now
+      cb(null, `${day}-${month}-${year}-${randomInt}`);
+    },
     metadata: function(req, file, cb) {
       cb(null, {
-        fieldName: "Testing Metadata callback"
+        fieldName: metaDataString
       });
-    },
-    key: function(req, file, cb) {
-      cb(null, Date.now().toString())
     }
   })
 });
