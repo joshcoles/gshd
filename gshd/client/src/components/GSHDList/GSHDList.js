@@ -38,6 +38,8 @@ class GSHDList extends Component {
 
   render() {
 
+    console.log(this.fetch)
+
     return (
       <section className="section">
         <div className="container">
@@ -45,7 +47,7 @@ class GSHDList extends Component {
           <div className="columns">
             <div className="column is-one-third dog-list-cards">
               <ul>
-                {this.state.gshds.map((gshd, index) => <GSHDListing gshd={gshd} key={index} handleUpdates={this.fetchUpdatedDogList} />)}
+                {this.state.gshds.map((gshd, index) => <GSHDListing gshd={gshd} key={index} handleUpdates={this.fetchUpdatedGSHDList} />)}
               </ul>
             </div>
             <div className="column is-two-thirds">

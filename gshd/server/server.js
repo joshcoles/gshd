@@ -141,6 +141,8 @@ gshdRoutes.route('/delete/:id').delete((req, res) => {
 // ---------------------------------------------
 app.post('/upload', (req, res) => {
 
+  console.log(req);
+
   singleUpload(req, res, (err) => {
     return res.json({
       'imageUrl': req.file.location

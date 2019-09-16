@@ -19,7 +19,7 @@ aws.config.update({
 });  
 
 const bucketName = 'gshd-images';
-const metaDataString = '';
+const metaData = 'testKey: testValue';
 
 const upload = multer({
   storage: multerS3({
@@ -38,7 +38,7 @@ const upload = multer({
     },
     metadata: function(req, file, cb) {
       cb(null, {
-        fieldName: metaDataString
+        fieldName: metaData
       });
     }
   })

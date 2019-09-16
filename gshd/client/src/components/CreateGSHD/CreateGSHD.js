@@ -40,12 +40,6 @@ class CreateGSHD extends Component {
     });
   }
 
-  onChangeImage(e) {
-    this.setState({
-      image: e.target.value
-    });
-  }
-
   onChangeLatitude(e) {
 
     const newGeometry = {
@@ -87,38 +81,84 @@ class CreateGSHD extends Component {
     });
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-
-    const newGshd = {
-      gshd_title: this.state.title,
-      gshd_location: this.state.location,
-      gshd_rating: this.state.rating,
-      gshd_image: this.state.image,
-      gshd_date: Date.now(),
-      gshd_geometry: {
-        coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat)]
-      }
-    }
-
-    axios.post('http://localhost:4000/gshds/add', newGshd)
-      .then(res => console.log(res.data))
-      .then(() => {
-        this.props.history.push('/gshds');
-      });
+  onChangeImage(e) {
+    const file = e.target.files[0];
+    
 
     this.setState({
-      title: '',
-      location: '',
-      rating: '',
-      image: '',
-      gshd_date: '',
-      geometry: {
-        lat: '',
-        lng: ''
-      }
+      image: file
     });
 
+    console.log(`State updated, image here: : `);
+    console.log(this.state.image);
+  }
+
+  uploadImageToS3() {
+    return new Promise((resolve, reject) => {
+      let formData = new FormData();
+
+      formData.append('gshd-image', this.state.image);
+  
+      axios.post('http://localhost:4000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(res => {
+
+          this.setState({
+            image: res.data.imageUrl
+          });
+
+          console.log(res);
+          resolve(res);
+        })
+        .catch(err => {
+          
+          console.log(err);
+          reject(err);
+        });
+
+        
+    });
+  }
+
+  onSubmit(e) {
+
+    e.preventDefault();
+
+    this.uploadImageToS3()
+      .then(() => {
+
+        const newGshd = {
+          gshd_title: this.state.title,
+          gshd_location: this.state.location,
+          gshd_rating: this.state.rating,
+          gshd_image: this.state.image,
+          gshd_date: Date.now(),
+          gshd_geometry: {
+            coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat)]
+          }
+        }
+    
+        axios.post('http://localhost:4000/gshds/add', newGshd)
+          .then(res => console.log(res.data))
+          .then(() => {
+            this.props.history.push('/gshds');
+          });
+    
+        this.setState({
+          title: '',
+          location: '',
+          rating: '',
+          image: '',
+          gshd_date: '',
+          geometry: {
+            lat: '',
+            lng: ''
+          }
+        });
+      });
   }
 
   render() {
@@ -159,6 +199,20 @@ class CreateGSHD extends Component {
                 <div className="column">
                   <div className="field">
                     <label className="label" htmlFor="image">Image</label>
+                    <div className="file has-name">
+                      <label className="file-label">
+                        <input onChange={this.onChangeImage} className="file-input" type="file" name="resume"/>
+                          <span className="file-cta">
+                            <span className="file-icon"><i className="fas fa-upload"></i></span>
+                            <span className="file-label">Choose a file…</span>
+                          </span>
+                          <span className="file-name"></span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* <div className="field">
+                    <label className="label" htmlFor="image">Image</label>
                     <div className="control">
                       <input 
                         className="input" 
@@ -170,7 +224,7 @@ class CreateGSHD extends Component {
                         />
 
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="field star-ratings">
                     <label className="label" htmlFor="rating">Rating</label>
