@@ -13,6 +13,7 @@ class CreateGSHD extends Component {
       location: '',
       rating: '',
       image: '',
+      imageName: '',
       geometry: {
         lat: '',
         lng: ''
@@ -83,14 +84,12 @@ class CreateGSHD extends Component {
 
   onChangeImage(e) {
     const file = e.target.files[0];
+    const name = e.target.files[0].name;
     
-
     this.setState({
-      image: file
+      image: file,
+      imageName: name
     });
-
-    console.log(`State updated, image here: : `);
-    console.log(this.state.image);
   }
 
   uploadImageToS3() {
@@ -199,33 +198,21 @@ class CreateGSHD extends Component {
                 <div className="column">
                   <div className="field">
                     <label className="label" htmlFor="image">Image</label>
-                    <div className="file has-name">
+                    <div className={`file ${this.state.imageName.length ? 'has-name' : ''}`}>
                       <label className="file-label">
-                        <input onChange={this.onChangeImage} className="file-input" type="file" name="resume"/>
+                        <input onChange={this.onChangeImage} className="file-input" type="file"/>
                           <span className="file-cta">
                             <span className="file-icon"><i className="fas fa-upload"></i></span>
                             <span className="file-label">Choose a file…</span>
                           </span>
-                          <span className="file-name"></span>
+                          {
+                            this.state.imageName.length ? 
+                            <span className="file-name">{ this.state.imageName }</span> : ''
+                          }
+                          
                       </label>
                     </div>
                   </div>
-
-                  {/* <div className="field">
-                    <label className="label" htmlFor="image">Image</label>
-                    <div className="control">
-                      <input 
-                        className="input" 
-                        type="text" 
-                        name="image" 
-                        placeholder="https://www.imgur.com/gshd" 
-                        onChange={this.onChangeImage} 
-                        value={this.state.image}
-                        />
-
-                    </div>
-                  </div> */}
-
                   <div className="field star-ratings">
                     <label className="label" htmlFor="rating">Rating</label>
                     { stars }

@@ -13,6 +13,7 @@ class EditGSHD extends Component {
       location: '',
       rating: '',
       image: '',
+      imageName: '',
       geometry: {
         lat: '',
         lng: ''
@@ -83,11 +84,20 @@ class EditGSHD extends Component {
       rating: e.target.value
     });
   }
+
   onChangeImage(e) {
-    this.setState({
-      image: e.target.value
-    });
-  }
+  const file = e.target.files[0];
+  const name = e.target.files[0].name;
+  
+  debugger;
+  this.setState({
+    image: file,
+    imageName: name,
+    isOriginalImage: false
+  });
+}
+
+
   onChangeLatitude(e) {
     const newGeometry = {...this.state.geometry}
     newGeometry.lat = e.target.value;
@@ -145,7 +155,6 @@ class EditGSHD extends Component {
                         </div>
                       </div>
 
-
                       <div className="field">
                         <label className="label" htmlFor="location">Location</label>
                         <div className="control">
@@ -156,9 +165,27 @@ class EditGSHD extends Component {
                     </div>
 
                     <div className="column">
+                      <div className="field star-ratings">
+                        <label className="label" htmlFor="rating">Rating</label>
+                        {
+                          <Stars onRatingChange={this.onChangeRating} mutable={true} rating={this.state.rating}/>
+                        }
+                      </div>
+
                       <div className="field">
                         <label className="label" htmlFor="image">Image</label>
-                        <div className="control">
+  
+                        <div className="current-image">
+                          <label>
+                            <input onChange={this.onChangeImage} className="file-input" type="file"/>
+                            <span>
+                              <i className="fas fa-edit"></i>
+                            </span>
+                          </label>
+                          <img alt="A hot dog" src={this.state.image}/>
+                        </div>
+                        
+                        {/* <div className="control">
                           <input 
                             className="input" 
                             type="text" 
@@ -166,13 +193,7 @@ class EditGSHD extends Component {
                             onChange={this.onChangeImage} 
                             value={this.state.image}
                             />
-                        </div>
-                      </div>
-                      <div className="field star-ratings">
-                        <label className="label" htmlFor="rating">Rating</label>
-                        {
-                          <Stars onRatingChange={this.onChangeRating} mutable={true} rating={this.state.rating}/>
-                        }
+                        </div> */}
                       </div>
                     </div>
                 </div>

@@ -79,3 +79,21 @@ form {
     margin-bottom: 10px;
   }
 }
+
+.current-image {
+  display: inline-block;
+  position: relative;
+  img {
+    height: 200px;
+  }
+  
+  span {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
