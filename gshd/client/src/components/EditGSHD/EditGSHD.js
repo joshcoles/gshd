@@ -14,6 +14,7 @@ class EditGSHD extends Component {
       rating: '',
       image: '',
       imageName: '',
+      imageIsLoading: false,
       geometry: {
         lat: '',
         lng: ''
@@ -34,7 +35,6 @@ class EditGSHD extends Component {
   componentDidMount() {
     axios.get(`http://localhost:4000/gshds/${this.props.match.params.id}`)
       .then(res => {
-        console.log(res);
         this.setState({
           title: res.data.gshd_title,
           location: res.data.gshd_location,
@@ -88,12 +88,38 @@ class EditGSHD extends Component {
   onChangeImage(e) {
   const file = e.target.files[0];
   const name = e.target.files[0].name;
-  
-  debugger;
+
   this.setState({
     image: file,
     imageName: name,
-    isOriginalImage: false
+    imageIsLoading: true
+  },
+    () => this.uploadImageToS3()
+      .then((data) => {
+        this.setState({
+          imageIsLoading: false
+        })
+      })
+  );
+
+}
+
+uploadImageToS3() {
+  return new Promise((resolve, reject) => {
+    let formData = new FormData();
+
+    formData.append('gshd-image', this.state.image);
+
+    axios.post('http://localhost:4000/upload', formData, {
+      headers: {'Content-Type': 'multipart/form-data'}
+    })
+      .then(res => {
+
+        this.setState({ image: res.data.imageUrl });
+
+        resolve(res);
+      })
+      .catch(err => reject(err));
   });
 }
 
@@ -182,18 +208,18 @@ class EditGSHD extends Component {
                               <i className="fas fa-edit"></i>
                             </span>
                           </label>
-                          <img alt="A hot dog" src={this.state.image}/>
+                          {
+                            !this.state.imageIsLoading ? 
+                            (
+                              <img alt="A hot dog" src={this.state.image}/> 
+                            ) : (
+                              <div className="loading-container">
+                                <div className="button is-loading"></div>
+                              </div>
+                            )
+                          }
+                          {/* <img alt="A hot dog" src={this.state.image}/> */}
                         </div>
-                        
-                        {/* <div className="control">
-                          <input 
-                            className="input" 
-                            type="text" 
-                            name="image" 
-                            onChange={this.onChangeImage} 
-                            value={this.state.image}
-                            />
-                        </div> */}
                       </div>
                     </div>
                 </div>

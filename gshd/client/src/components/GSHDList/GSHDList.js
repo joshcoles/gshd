@@ -37,9 +37,6 @@ class GSHDList extends Component {
   }
 
   render() {
-
-    console.log(this.fetch)
-
     return (
       <section className="section">
         <div className="container">

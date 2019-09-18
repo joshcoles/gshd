@@ -7,7 +7,6 @@ class GSHDListing extends Component {
   constructor(props) {
     super(props);
     
-    console.log(this.props);
     this.deleteGSHD = this.deleteGSHD.bind(this);
   }
 

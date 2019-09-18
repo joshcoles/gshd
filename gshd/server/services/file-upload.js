@@ -33,10 +33,12 @@ const upload = multer({
       const year = currentDay.getFullYear();
       const randomInt = Math.floor(Math.random() * 100000000);
 
+      console.log('hitting key');
       // Pass dynamic name for image based on date for now
       cb(null, `${day}-${month}-${year}-${randomInt}`);
     },
     metadata: function(req, file, cb) {
+      console.log('hitting metadata');
       cb(null, {
         fieldName: metaData
       });

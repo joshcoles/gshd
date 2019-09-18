@@ -1,0 +1,26 @@
+@import '~bulma/sass/utilities/mixins';
+
+.uploaded-image {
+  padding-right: 25px;
+  position: relative;
+  max-width: 300px; 
+  .edit {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+}
+
+.loading-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  width: 300px;
+  div {
+    background: none;
+    border: none;
+  }
+}

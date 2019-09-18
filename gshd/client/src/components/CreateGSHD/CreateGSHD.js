@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import AutoCompletePlaces from '../utils/AutoCompletePlaces/AutoCompletePlaces.js';
 import Stars from '../ui/Stars.js';
+import './CreateGSHD.scss';
 
 class CreateGSHD extends Component {
 
@@ -14,6 +15,8 @@ class CreateGSHD extends Component {
       rating: '',
       image: '',
       imageName: '',
+      imageIsLoading: false,
+      imageHasBeenUploaded: false,
       geometry: {
         lat: '',
         lng: ''
@@ -83,15 +86,27 @@ class CreateGSHD extends Component {
   }
 
   onChangeImage(e) {
+
     const file = e.target.files[0];
     const name = e.target.files[0].name;
     
     this.setState({
+      imageIsLoading: true,
       image: file,
       imageName: name
-    });
+    },
+      () => this.uploadImageToS3()
+        .then((data) => {
+          this.setState({
+            imageHasBeenUploaded: true,
+            imageIsLoading: false
+          })
+        })
+    );
+
   }
 
+  // Images get uploaded each time user selects new image, and state gets updated with S3 Image URL
   uploadImageToS3() {
     return new Promise((resolve, reject) => {
       let formData = new FormData();
@@ -99,26 +114,15 @@ class CreateGSHD extends Component {
       formData.append('gshd-image', this.state.image);
   
       axios.post('http://localhost:4000/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+        headers: {'Content-Type': 'multipart/form-data'}
       })
         .then(res => {
 
-          this.setState({
-            image: res.data.imageUrl
-          });
+          this.setState({ image: res.data.imageUrl });
 
-          console.log(res);
           resolve(res);
         })
-        .catch(err => {
-          
-          console.log(err);
-          reject(err);
-        });
-
-        
+        .catch(err => reject(err));
     });
   }
 
@@ -126,43 +130,63 @@ class CreateGSHD extends Component {
 
     e.preventDefault();
 
-    this.uploadImageToS3()
-      .then(() => {
+    const newGshd = {
+      gshd_title: this.state.title,
+      gshd_location: this.state.location,
+      gshd_rating: this.state.rating,
+      gshd_image: this.state.image,
+      gshd_date: Date.now(),
+      gshd_geometry: {
+        coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat)]
+      }
+    }
 
-        const newGshd = {
-          gshd_title: this.state.title,
-          gshd_location: this.state.location,
-          gshd_rating: this.state.rating,
-          gshd_image: this.state.image,
-          gshd_date: Date.now(),
-          gshd_geometry: {
-            coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat)]
-          }
-        }
-    
-        axios.post('http://localhost:4000/gshds/add', newGshd)
-          .then(res => console.log(res.data))
-          .then(() => {
-            this.props.history.push('/gshds');
-          });
-    
-        this.setState({
-          title: '',
-          location: '',
-          rating: '',
-          image: '',
-          gshd_date: '',
-          geometry: {
-            lat: '',
-            lng: ''
-          }
-        });
-      });
+    // Send new GSHD to server then redirect to list of all GSHDs
+    axios.post('http://localhost:4000/gshds/add', newGshd)
+      .then(res => console.log(res.data))
+      .then(() => this.props.history.push('/gshds'));
   }
 
   render() {
 
+    // Stars logic lives inside component
     const stars = <Stars onRatingChange={this.onChangeRating} mutable={true} rating={this.state.rating}/>;
+
+    // Initial image upload button + file display input, shown until user uploads first image
+    const preUploadMarkup = (
+      <div className={`file ${this.state.imageName.length ? 'has-name' : ''}`}>
+        <label className="file-label">
+          <input onChange={this.onChangeImage} className="file-input" type="file"/>
+            <span className={`file-cta button ${this.state.imageIsLoading ? 'is-loading' : ''}`}>
+              <span className="file-icon"><i className="fas fa-upload"></i></span>
+              <span className="file-label">Choose a file…</span>
+            </span>
+            { this.state.imageName.length ? <span className="file-name">{ this.state.imageName }</span> : ''}
+        </label>
+      </div>
+    );
+
+    const postUploadMarkup = (
+      <div className="uploaded-image">
+        {
+          !this.state.imageIsLoading ? 
+          (
+            <img alt="A hot dog" src={this.state.image}/> 
+          ) : (
+            <div className="loading-container">
+              <div className="button is-loading"></div>
+            </div>
+          )
+        }
+
+        <label className="edit">
+          <input onChange={this.onChangeImage} className="file-input" type="file"/>
+          <span>
+            <i className="fas fa-edit"></i>
+          </span>
+        </label>
+      </div>
+    )
 
     return (
       <div>
@@ -196,26 +220,13 @@ class CreateGSHD extends Component {
                 </div>
 
                 <div className="column">
-                  <div className="field">
-                    <label className="label" htmlFor="image">Image</label>
-                    <div className={`file ${this.state.imageName.length ? 'has-name' : ''}`}>
-                      <label className="file-label">
-                        <input onChange={this.onChangeImage} className="file-input" type="file"/>
-                          <span className="file-cta">
-                            <span className="file-icon"><i className="fas fa-upload"></i></span>
-                            <span className="file-label">Choose a file…</span>
-                          </span>
-                          {
-                            this.state.imageName.length ? 
-                            <span className="file-name">{ this.state.imageName }</span> : ''
-                          }
-                          
-                      </label>
-                    </div>
-                  </div>
                   <div className="field star-ratings">
                     <label className="label" htmlFor="rating">Rating</label>
                     { stars }
+                  </div>
+                  <div className="field">
+                    <label className="label" htmlFor="image">Image</label>
+                    { !this.state.imageHasBeenUploaded ? preUploadMarkup : postUploadMarkup }
                   </div>
                 </div>
               </div>
