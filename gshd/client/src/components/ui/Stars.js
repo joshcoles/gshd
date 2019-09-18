@@ -5,15 +5,23 @@ class Stars extends Component {
     super(props);
 
     this.state = {
-      rating: this.props.rating
+      rating: this.props.rating  
     }
+    
+    console.log(this.props.rating);
 
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      rating: nextProps.rating
+    });
   }
 
   render() {
   
     const rating = this.state.rating;
-
+    
     return (
       <fieldset onChange={this.props.onRatingChange} className={`${this.props.mutable ? 'mutable' : 'immutable'}`}>
           <input defaultChecked={rating === 5} type="radio" id="star5" name="rating" value={5} />
@@ -50,6 +58,7 @@ class Stars extends Component {
               <i className="fas fa-star"></i>
             </span>
           </label>
+
       </fieldset>
     )
   }

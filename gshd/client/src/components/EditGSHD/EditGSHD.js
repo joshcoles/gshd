@@ -46,6 +46,7 @@ class EditGSHD extends Component {
           }
         });
       })
+      .then(() => console.log(this.state.rating))
       .catch(err => console.error(err));
   }
 
@@ -80,6 +81,7 @@ class EditGSHD extends Component {
     });
   }
   onChangeRating(e) {
+    console.log("fired");
     this.setState({
       rating: e.target.value
     });
@@ -218,7 +220,6 @@ uploadImageToS3() {
                               </div>
                             )
                           }
-                          {/* <img alt="A hot dog" src={this.state.image}/> */}
                         </div>
                       </div>
                     </div>
