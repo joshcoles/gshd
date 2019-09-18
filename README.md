@@ -40,10 +40,10 @@ This project is licensed under the MIT License.
 ## Screenshots
 
 ### List
-![List](./order-up/src/screenshots/list-screenshot.png "List")
+![List](./gshd/client/src/images/screenshots/list-screenshot.png/ "List")
 
 ### Create
-![Create](./order-up/src/screenshots/create-screenshot.png "Create")
+![Create](./gshd/client/src/images/screenshots/create-screenshot.png/ "Create")
 
 ### Edit
-![Edit](./order-up/src/screenshots/edit-screenshot.png "Edit")
+![Edit](./gshd/client/src/images/screenshots/edit-screenshot.png/ "Edit")
