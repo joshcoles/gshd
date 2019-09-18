@@ -96,6 +96,7 @@ gshdRoutes.route('/add').post((req, res) => {
 // ---------------------------------------------
 gshdRoutes.route('/update/:id').post((req, res) => {
   let id = req.params.id;
+
   GSHD.findById(id, (err, gshd) => {
     if (!gshd) {
       res.status(404).send('Data is not found')
@@ -105,6 +106,11 @@ gshdRoutes.route('/update/:id').post((req, res) => {
       gshd.gshd_rating = req.body.gshd_rating;
       gshd.gshd_image = req.body.gshd_image;
       gshd.gshd_date = req.body.gshd_date;
+      gshd.gshd_geometry = {
+        "type": "Point",
+        "_id": id,
+        "coordinates": [...req.body.gshd_geometry.coordinates]
+    }
 
       gshd.save().then(gshd => {
         res.json('GSHD Updated');

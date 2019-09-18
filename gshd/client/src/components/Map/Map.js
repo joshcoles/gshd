@@ -10,7 +10,7 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 const googleMapsApiToken = process.env.REACT_APP_GOOGLE_MAPS_API_TOKEN;
 
 class GoogleMap extends Component {
-      
+
   render() {    
     return (
       <Map
