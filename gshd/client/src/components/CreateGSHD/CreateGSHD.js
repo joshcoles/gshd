@@ -82,6 +82,8 @@ class CreateGSHD extends Component {
     this.setState({
       geometry: newGeometry,
       location: dataFromChild.address
+    }, () => {
+      console.log(this.state.geometry);
     });
   }
 
@@ -137,7 +139,7 @@ class CreateGSHD extends Component {
       gshd_image: this.state.image,
       gshd_date: Date.now(),
       gshd_geometry: {
-        coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat)]
+        coordinates: [this.state.geometry.lng, this.state.geometry.lat]
       }
     }
 

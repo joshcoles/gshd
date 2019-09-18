@@ -41,7 +41,9 @@ class AutoCompletePlaces extends Component {
     this.setState({ address });
 
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
+      .then(results => {
+        return getLatLng(results[0])
+      })
       .then(latLng => this.props.selectionHandler({latLng, address}))
       .catch(error => console.error(`
         Error when trying to get lat/lng: ${error}

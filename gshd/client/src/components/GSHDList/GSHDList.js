@@ -7,13 +7,12 @@ class GSHDList extends Component {
 
   constructor(props) {
     super(props);
-    
+  
     this.state = {
       gshds: []
     };
 
     this.fetchUpdatedGSHDList = this.fetchUpdatedGSHDList.bind(this);
-
   }
 
   componentDidMount() {

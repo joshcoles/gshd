@@ -58,7 +58,7 @@ class EditGSHD extends Component {
       gshd_rating: this.state.rating,
       gshd_image: this.state.image,
       gshd_geometry: {
-        coordinates: [parseInt(this.state.geometry.lng), parseInt(this.state.geometry.lat),]
+        coordinates: [this.state.geometry.lng, this.state.geometry.lat,]
       }
     }
 

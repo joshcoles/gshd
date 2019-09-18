@@ -10,17 +10,18 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 const googleMapsApiToken = process.env.REACT_APP_GOOGLE_MAPS_API_TOKEN;
 
 class GoogleMap extends Component {
-    render(props) {
       
+  render() {    
     return (
       <Map
         google={this.props.google}
-        zoom={2}
-        initialCenter={{ lat: 49.2827, lng: -123.1207}}>
+        zoom={12}
+        initialCenter={{ lat: 43.6426, lng: -79.3871}}>
         {
           this.props.gshds.map((gshd, index) => {
             const lng = this.props.gshds[index].gshd_geometry.coordinates[0];
             const lat = this.props.gshds[index].gshd_geometry.coordinates[1];
+
             return (
               <Marker key={index} position={{ lat: lat, lng: lng }}/>
             )
