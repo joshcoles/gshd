@@ -12,8 +12,17 @@ class AutoCompletePlaces extends Component {
     super(props);
     this.state = {
       address: '',
-      gmapsLoaded: false
+      gmapsLoaded: false,
+      location: this.props.location
     }
+
+    console.log(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      location: nextProps.location
+    })
   }
 
   // Used to flag the point at which Google Maps is loaded on page
@@ -64,8 +73,8 @@ class AutoCompletePlaces extends Component {
               <div>
                 <input
                   {...getInputProps({
-                    placeholder: 'Search Places...',
-                    className: 'location-search-input input',
+                    placeholder: this.state.loading,
+                    className: 'location-search-input input'
                   })}
                 />
                 {loading && <div>Loading...</div>}

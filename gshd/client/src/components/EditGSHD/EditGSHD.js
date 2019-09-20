@@ -81,7 +81,6 @@ class EditGSHD extends Component {
     });
   }
   onChangeRating(e) {
-    console.log("fired");
     this.setState({
       rating: e.target.value
     });
@@ -187,7 +186,7 @@ uploadImageToS3() {
                         <label className="label" htmlFor="location">Location</label>
                         <div className="control">
                           <AutoCompletePlaces 
-                            selectionHandler={this.onAutoCompletePlacesSelect} />
+                            defaultLocation={this.state.location} selectionHandler={this.onAutoCompletePlacesSelect} />
                         </div>
                       </div>
                     </div>
