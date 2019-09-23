@@ -15,8 +15,6 @@ class AutoCompletePlaces extends Component {
       gmapsLoaded: false,
       location: this.props.location
     }
-
-    console.log(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
