@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Stars from '../ui/Stars.js';
+// import Stars from '../ui/Stars.js';
 
 class GSHDListing extends Component {
 
@@ -22,7 +22,7 @@ class GSHDListing extends Component {
   // When star ratings are read-only, they still require this event handler to get passed through
   // Otherwise, react will complain that I am giving a checked attribute to somethat that has no
   // event listener
-  onChangeRating() {}
+  // onChangeRating() {}
 
   render() {
 
@@ -49,8 +49,7 @@ class GSHDListing extends Component {
               </span>
             </div>
             <div className="star-ratings">
-                {this.props.gshd.gshd_rating}
-              <Stars onRatingChange={this.onChangeRating} mutable={false} rating={this.props.gshd.gshd_rating}/>
+              {/* <Stars onRatingChange={this.onChangeRating} mutable={false} rating={this.props.gshd.gshd_rating}/> */}
             </div>
             <p>{this.props.gshd.gshd_location}</p>
             <br/>

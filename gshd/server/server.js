@@ -19,7 +19,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://127.0.0.1:27017/gshd', ({ useNewUrlParser: true }));
+
+// Connection to local DB that is no longer being used
+// mongoose.connect('mongodb://127.0.0.1:27017/gshd', ({ useNewUrlParser: true }));
+
+mongoose.connect(`mongodb+srv://${process.env.MONGODB_CLOUD_USERNAME}:${process.env.MONGODB_CLOUD_PASSWORD}@gshd-mxrpx.mongodb.net/gshd-db?retryWrites=true&w=majority`)
 const connection = mongoose.connection;
 
 connection.once('open', () => {
@@ -46,28 +50,7 @@ gshdRoutes.route('/').get((req, res) => {
   })
 });
 
-// ---------------------------------------------
-// GET /gshds/:id
-// ---------------------------------------------
-gshdRoutes.route('/:id').get((req, res) => {
-  
-  let id = req.params.id;
 
-  GSHD.findById(id, (err, gshd) => {
-    if (err) {
-      console.log(`
-        -----------------------------------
-        GSHD Error when attempting to GET /gshds/:id 
-        ${err}
-      `);
-    } else {
-      console.log(`
-        GSHD Success: request made to /gshds/${id}
-      `);
-      res.json(gshd);
-    }
-  });
-});
 
 
 // ---------------------------------------------
@@ -90,6 +73,28 @@ gshdRoutes.route('/add').post((req, res) => {
     });
 });
 
+// ---------------------------------------------
+// GET /gshds/:id
+// ---------------------------------------------
+gshdRoutes.route('/:id').get((req, res) => {
+  
+  let id = req.params.id;
+
+  GSHD.findById(id, (err, gshd) => {
+    if (err) {
+      console.log(`
+        -----------------------------------
+        GSHD Error when attempting to GET /gshds/:id 
+        ${err}
+      `);
+    } else {
+      console.log(`
+        GSHD Success: request made to /gshds/${id}
+      `);
+      res.json(gshd);
+    }
+  });
+});
 
 // ---------------------------------------------
 // POST /update/:id

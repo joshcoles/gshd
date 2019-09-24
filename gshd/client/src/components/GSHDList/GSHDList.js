@@ -39,7 +39,7 @@ class GSHDList extends Component {
     return (
       <section className="section">
         <div className="container">
-          <h1>Your Gretzky-Style Hot Dogs</h1>
+          <h1>Gretzky-Style Hot Dogs</h1>
           <div className="columns">
             <div className="column is-one-third dog-list-cards">
               <ul>

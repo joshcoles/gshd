@@ -20,7 +20,7 @@ class Nav extends Component {
           </div>
           <div className="navbar-menu">
             <div className="navbar-start">
-              <Link className="navbar-item" to="/gshds">My GSHDs</Link>
+              <Link className="navbar-item" to="/gshds">GSHDs</Link>
               <Link className="navbar-item" to="/create-gshd">Create GSHD</Link>
             </div>
             <div className="navbar-end">
