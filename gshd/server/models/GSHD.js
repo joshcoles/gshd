@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Schema to be referenced as gshd_geometry in gshd
-let gshd_location = new Schema({
+let LocationSchema = new Schema({
   type: {
     type: String,
     default: 'Point'
@@ -14,7 +14,7 @@ let gshd_location = new Schema({
 });
 
 // Primary schema
-let gshd = new Schema({
+let GSHDSchema = new Schema({
   gshd_title: {
     type: String
   },
@@ -30,7 +30,7 @@ let gshd = new Schema({
   gshd_date: {
     type: Date
   },
-  gshd_geometry: gshd_location
+  gshd_geometry: LocationSchema
 });
 
-module.exports = mongoose.model('GSHG', gshd);
+module.exports = mongoose.model('GSHD', GSHDSchema);

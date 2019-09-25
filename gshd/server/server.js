@@ -6,7 +6,8 @@ const cors = require('cors');
 const PORT = 4000;
 const gshdRoutes = express.Router();
 const mongoose = require('mongoose');
-const GSHD = require('./gshd.model');
+const GSHD = require('./models/GSHD.js');
+const dbURI = require('./config/keys').mongoURI;
 
 const upload = require('./services/file-upload.js');
 const singleUpload = upload.single('gshd-image');
@@ -23,12 +24,17 @@ mongoose.set('useCreateIndex', true);
 // Connection to local DB that is no longer being used
 // mongoose.connect('mongodb://127.0.0.1:27017/gshd', ({ useNewUrlParser: true }));
 
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_CLOUD_USERNAME}:${process.env.MONGODB_CLOUD_PASSWORD}@gshd-mxrpx.mongodb.net/gshd-db?retryWrites=true&w=majority`)
+// Connect to remote DB at https://cloud.mongodb.com
+mongoose
+  .connect(dbURI, { useNewUrlParser: true })
+  .then(() => console.log(`MongoDB database connection established successfully.`))
+  .catch((err) => console.log(`Ohhhh no oh no something went wrong uh oh oh no`));
+
 const connection = mongoose.connection;
 
-connection.once('open', () => {
-  console.log("MongoDB database connection established successfully.");
-});
+// connection.once('open', () => {
+//   console.log("MongoDB database connection established successfully.");
+// });
 
 // ---------------------------------------------
 // GET /gshds/
