@@ -18,6 +18,9 @@ In the backend, it is running on:
 * Express.js 
 * MongoDB 
 * Mongoose.js.
+* AWS S3
+* bcrypt
+* Passport.js
 
 On the frontend, it uses: 
  
