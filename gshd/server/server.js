@@ -4,20 +4,30 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const PORT = 4000;
-const gshdRoutes = express.Router();
+const router = express.Router();
 const mongoose = require('mongoose');
 const GSHD = require('./models/GSHD.js');
 const dbURI = require('./config/keys').mongoURI;
+const passport = require('passport');
+const users = require('./routes/api/users');
+
+
 
 const upload = require('./services/file-upload.js');
 const singleUpload = upload.single('gshd-image');
 
+require('./routes/api/users.js');
+require('./config/passport')(passport);
+
+
 // Middleware
 app.use(cors());
+app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use('/api/users', users);
 
 mongoose.set('useCreateIndex', true);
 
@@ -32,7 +42,7 @@ const connection = mongoose.connection;
 // ---------------------------------------------
 // GET /gshds/
 // ---------------------------------------------
-gshdRoutes.route('/').get((req, res) => {
+router.route('/').get((req, res) => {
   GSHD.find((err, gshds) => {
     if (err) {
       console.log(`
@@ -52,7 +62,7 @@ gshdRoutes.route('/').get((req, res) => {
 // ---------------------------------------------
 // POST /gshds/add
 // ---------------------------------------------
-gshdRoutes.route('/add').post((req, res) => {
+router.route('/add').post((req, res) => {
 
   // Create new document (instance of a model) using data pulled from request
   const gshd = new GSHD(req.body);
@@ -72,7 +82,7 @@ gshdRoutes.route('/add').post((req, res) => {
 // ---------------------------------------------
 // GET /gshds/:id
 // ---------------------------------------------
-gshdRoutes.route('/:id').get((req, res) => {
+router.route('/:id').get((req, res) => {
   
   let id = req.params.id;
 
@@ -95,7 +105,7 @@ gshdRoutes.route('/:id').get((req, res) => {
 // ---------------------------------------------
 // POST /update/:id
 // ---------------------------------------------
-gshdRoutes.route('/update/:id').post((req, res) => {
+router.route('/update/:id').post((req, res) => {
   let id = req.params.id;
 
   GSHD.findById(id, (err, gshd) => {
@@ -126,7 +136,7 @@ gshdRoutes.route('/update/:id').post((req, res) => {
 // ---------------------------------------------
 // DELETE /delete/:id
 // ---------------------------------------------
-gshdRoutes.route('/delete/:id').delete((req, res) => {
+router.route('/delete/:id').delete((req, res) => {
   GSHD
     .findByIdAndDelete(req.params.id)
     .exec()
@@ -158,7 +168,7 @@ app.post('/upload', (req, res) => {
   });
 });
 
-app.use('/gshds', gshdRoutes);
+app.use('/gshds', router);
 
 app.listen(PORT,() => {
   console.log(`Listening on port ${PORT}`);

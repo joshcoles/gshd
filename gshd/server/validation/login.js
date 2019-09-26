@@ -26,4 +26,4 @@ const validateLoginInput = (data) => {
   };
 };
 
-module.exports = validateRegisterInput;
+module.exports = validateLoginInput;
