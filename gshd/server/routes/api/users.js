@@ -12,8 +12,12 @@ const validateLoginInput = require('../../validation/login.js');
 // Load User model
 const User = require('../../models/User.js');
 
+/*
+ * @route POST /api/users/register
+ * @desc Validates name, email and password. Creates User obj, hashes password then saves in DB.
+ * --------------------------------------------
+ */
 
-/* Register Route -------------------------------------------------------------------------------- */
 router.post('/register', (req, res) => {
 
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -30,7 +34,7 @@ router.post('/register', (req, res) => {
       // Handle cases - User exists or does not yet exist
       if (user) {
         // Send error
-        return res.status(400).json({email: "An account with that email already exists"});
+        return res.status(400).json({email: 'An account with that email already exists'});
 
       } else {
         // Create new user object 
@@ -57,8 +61,13 @@ router.post('/register', (req, res) => {
 });
 
 
-/* Login Route -------------------------------------------------------------------------------- */
-router.post("/login", (req, res) => {
+/*
+ * @route POST /api/users/login
+ * @desc Validates name, email and password. Checks for user. Compares password with hashed password. Auth's and signs new JWT to expire in 1 year.
+ * --------------------------------------------
+ */
+
+router.post('/login', (req, res) => {
     
   const { errors, isValid } = validateLoginInput(req.body);
   
@@ -75,7 +84,7 @@ router.post("/login", (req, res) => {
 
     // Check if user exists
     if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
+      return res.status(404).json({ emailnotfound: 'Email not found' });
     }
 
     // Check password
@@ -92,11 +101,11 @@ router.post("/login", (req, res) => {
         jwt.sign(payload, keys.secretOrKey, { expiresIn: 31556926 }, (err, token) => {
           res.json({
             success: true,
-            token: "Bearer " + token
+            token: 'Bearer ' + token
           });
         });
       } else {
-        return res.status(400).json({ passwordincorrect: "Password incorrect" });
+        return res.status(400).json({ passwordincorrect: 'Password incorrect' });
       }
     });
   });
