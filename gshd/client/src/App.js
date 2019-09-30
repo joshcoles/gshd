@@ -7,6 +7,8 @@ import LandingPage from './components/LandingPage/LandingPage.js';
 import EditGSHD from './components/EditGSHD/EditGSHD.js';
 import CreateGSHD from './components/CreateGSHD/CreateGSHD.js';
 import Nav from './components/Nav/Nav.js';
+import Register from '../src/components/authentication/Register/Register.js';
+import Login from '../src/components/authentication/Login/Login.js';
 
 class App extends Component {
 
@@ -22,6 +24,8 @@ class App extends Component {
         <Route path="/gshds" component={GSHDList}/>
         <Route path="/create-gshd" component={CreateGSHD}/>
         <Route path="/edit-gshd/:id" component={EditGSHD}/>
+        <Route path="/register" component={Register}/>
+        <Route path="/login" component={Login}/>
       </Router>
     );
   }
