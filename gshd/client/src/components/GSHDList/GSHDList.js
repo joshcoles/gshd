@@ -16,7 +16,7 @@ class GSHDList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/gshds/')
+    axios.get('http://localhost:4000/api/gshds/')
       .then(response => {
         this.setState({
           gshds: response.data
@@ -26,7 +26,7 @@ class GSHDList extends Component {
   }
 
   fetchUpdatedGSHDList() {
-    axios.get('http://localhost:4000/gshds/')
+    axios.get('http://localhost:4000/api/gshds/')
       .then(response => {
         this.setState({
           gshds: response.data

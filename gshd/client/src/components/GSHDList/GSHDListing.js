@@ -12,7 +12,7 @@ class GSHDListing extends Component {
 
   deleteGSHD(e) {
     const elementId = e.target.closest('.box').id;
-    axios.delete(`http://localhost:4000/gshds/delete/${elementId}`)
+    axios.delete(`http://localhost:4000/api/gshds/delete/${elementId}`)
     .then((data) => {
       this.props.handleUpdates();
     });

@@ -115,7 +115,7 @@ class CreateGSHD extends Component {
 
       formData.append('gshd-image', this.state.image);
   
-      axios.post('http://localhost:4000/upload', formData, {
+      axios.post('http://localhost:4000/api/images/upload', formData, {
         headers: {'Content-Type': 'multipart/form-data'}
       })
         .then(res => {
@@ -144,7 +144,7 @@ class CreateGSHD extends Component {
     }
 
     // Send new GSHD to server then redirect to list of all GSHDs
-    axios.post('http://localhost:4000/gshds/add', newGshd)
+    axios.post('http://localhost:4000/api/gshds/add', newGshd)
       .then(res => console.log(res.data))
       .then(() => this.props.history.push('/gshds'));
   }

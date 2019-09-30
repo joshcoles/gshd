@@ -33,7 +33,7 @@ class EditGSHD extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:4000/gshds/${this.props.match.params.id}`)
+    axios.get(`http://localhost:4000/api/gshds/${this.props.match.params.id}`)
       .then(res => {
         this.setState({
           title: res.data.gshd_title,
@@ -63,7 +63,7 @@ class EditGSHD extends Component {
       }
     }
 
-    axios.post(`http://localhost:4000/gshds/update/${this.props.match.params.id}`, obj)
+    axios.post(`http://localhost:4000/api/gshds/update/${this.props.match.params.id}`, obj)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
 
@@ -111,7 +111,7 @@ uploadImageToS3() {
 
     formData.append('gshd-image', this.state.image);
 
-    axios.post('http://localhost:4000/upload', formData, {
+    axios.post('http://localhost:4000/api/images/upload', formData, {
       headers: {'Content-Type': 'multipart/form-data'}
     })
       .then(res => {
