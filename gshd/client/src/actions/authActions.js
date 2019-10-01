@@ -23,19 +23,29 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login User
 export const loginUser = userData => dispatch => {
+
   axios
-    .post('http://localhost:4000/api/users/register', userData)
+    .post('http://localhost:4000/api/users/login', userData)
     .then(res => {
-      
-      localStorage.setItem('jwtToken', res.data);
-      setAuthToken(res.data);
+
+      localStorage.setItem('jwtToken', res.data.token);
+
+      setAuthToken(res.data.token);
 
       dispatch({
         type: SET_CURRENT_USER,
-        payload: jwt_decode(res.data)
+        payload: jwt_decode(res.data.token)
       });
     });
 }
+
+// Set logged in user
+export const setCurrentUser = decoded => {
+  return {
+    type: SET_CURRENT_USER,
+    payload: decoded
+  };
+};
 
 // User loading
 export const setUserLoading = () => {
@@ -47,12 +57,14 @@ export const setUserLoading = () => {
 // Log user out
 export const logoutUser = () => dispatch => {
 
-// Remove token from local storage
-localStorage.removeItem("jwtToken");
-// Remove auth header for future requests
-setAuthToken(false);
-// Set current user to empty object {} which will set isAuthenticated to false
-dispatch({
+  // Remove token from local storage
+  localStorage.removeItem("jwtToken");
+
+  // Remove auth header for future requests
+  setAuthToken(false);
+
+  // Set current user to empty object {} which will set isAuthenticated to false
+  dispatch({
     type: SET_CURRENT_USER,
     payload: {}
   });

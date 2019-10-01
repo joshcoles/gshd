@@ -5,6 +5,7 @@ const setAuthToken = token => {
     
     // Apply auth header to every request if logged in
     axios.defaults.headers.common["Authorization"] = token;
+    
   } else {
     
     // Delete auth header
