@@ -25,6 +25,7 @@ In the backend, it is running on:
 On the frontend, it uses: 
  
 * React.js
+* Redux
 * Axios for HTTP requests
 * Bulma as a CSS framework
 * SCSS

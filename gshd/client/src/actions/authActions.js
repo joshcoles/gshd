@@ -9,8 +9,9 @@ import {
 } from "./types";
 
 // Register User
-export const registerUser = (userData, history) => dispatch => {
-  axios
+export const registerUser = (userData, history) => {
+  return (dispatch) => {
+    axios
     .post('http://localhost:4000/api/users/register', userData)
     .then(res => history.push('/login'))
     .catch(err => {
@@ -19,24 +20,27 @@ export const registerUser = (userData, history) => dispatch => {
         payload: err.response.data
       });
     }); 
+  }
 }
 
 // Login User
-export const loginUser = userData => dispatch => {
+export const loginUser = userData => {
+  return (dispatch) => {
 
-  axios
-    .post('http://localhost:4000/api/users/login', userData)
-    .then(res => {
-
-      localStorage.setItem('jwtToken', res.data.token);
-
-      setAuthToken(res.data.token);
-
-      dispatch({
-        type: SET_CURRENT_USER,
-        payload: jwt_decode(res.data.token)
+    axios
+      .post('http://localhost:4000/api/users/login', userData)
+      .then(res => {
+  
+        localStorage.setItem('jwtToken', res.data.token);
+  
+        setAuthToken(res.data.token);
+  
+        dispatch({
+          type: SET_CURRENT_USER,
+          payload: jwt_decode(res.data.token)
+        });
       });
-    });
+  }
 }
 
 // Set logged in user
@@ -55,17 +59,19 @@ export const setUserLoading = () => {
 };
 
 // Log user out
-export const logoutUser = () => dispatch => {
+export const logoutUser = () => {
+  return (dispatch) => {
 
-  // Remove token from local storage
-  localStorage.removeItem("jwtToken");
-
-  // Remove auth header for future requests
-  setAuthToken(false);
-
-  // Set current user to empty object {} which will set isAuthenticated to false
-  dispatch({
-    type: SET_CURRENT_USER,
-    payload: {}
-  });
-};
+    // Remove token from local storage
+    localStorage.removeItem("jwtToken");
+  
+    // Remove auth header for future requests
+    setAuthToken(false);
+  
+    // Set current user to empty object {} which will set isAuthenticated to false
+    dispatch({
+      type: SET_CURRENT_USER,
+      payload: {}
+    });
+  };
+}
