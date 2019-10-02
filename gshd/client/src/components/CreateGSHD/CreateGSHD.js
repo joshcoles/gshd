@@ -3,6 +3,9 @@ import axios from 'axios';
 import AutoCompletePlaces from '../utils/AutoCompletePlaces/AutoCompletePlaces.js';
 import Stars from '../ui/Stars.js';
 import './CreateGSHD.scss';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { newGSHD } from '../../actions/gshdActions.js';
 
 class CreateGSHD extends Component {
 
@@ -105,7 +108,6 @@ class CreateGSHD extends Component {
           })
         })
     );
-
   }
 
   // Images get uploaded each time user selects new image, and state gets updated with S3 Image URL
@@ -143,10 +145,7 @@ class CreateGSHD extends Component {
       }
     }
 
-    // Send new GSHD to server then redirect to list of all GSHDs
-    axios.post('http://localhost:4000/api/gshds/add', newGshd)
-      .then(res => console.log(res.data))
-      .then(() => this.props.history.push('/gshds'));
+    this.props.newGSHD(newGshd, this.props.history);
   }
 
   render() {
@@ -241,4 +240,11 @@ class CreateGSHD extends Component {
   }
 }
 
-export default CreateGSHD;
+CreateGSHD.propTypes = {
+  newGSHD: PropTypes.func.isRequired
+}
+
+export default connect(
+  null,
+  {newGSHD}
+)(CreateGSHD);

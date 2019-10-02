@@ -14,6 +14,12 @@ export default function (state = initialState, action) {
         gshds: action.payload
       }
 
+    case NEW_GSHD:
+      return {
+        ...state,
+        gshd: action.payload
+      }
+
     default:
       return state;
   }

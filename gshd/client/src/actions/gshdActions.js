@@ -11,18 +11,19 @@ export const getGSHDS = () => dispatch => {
         payload: response.data
       });
 
-    })
-    .catch(error => console.log(error));
+    }).catch(error => console.log(error));
  
 }
 
-// export const newGSHD = () => dispatch => {
+export const newGSHD = (newGshd, history) => dispatch => {
   
-//   // Send new GSHD to server then redirect to list of all GSHDs
-//   axios.post('http://localhost:4000/api/gshds/add', newGshd)
-//     .then(res => {
-//       dispatch()
-//     })
-//     .then(() => this.props.history.push('/gshds'));
-
-// }
+  // Send new GSHD to server then redirect to list of all GSHDs
+  axios.post('http://localhost:4000/api/gshds/add', newGshd)
+    .then(res => {
+      dispatch({
+        type: NEW_GSHD,
+        payload: res.data
+      })
+    }).then(() => history.push('/gshds'));;
+  
+}

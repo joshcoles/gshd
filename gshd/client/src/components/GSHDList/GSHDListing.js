@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getGSHDS } from '../../actions/gshdActions.js';
 
 class GSHDListing extends Component {
 
@@ -14,7 +17,7 @@ class GSHDListing extends Component {
     const elementId = e.target.closest('.box').id;
     axios.delete(`http://localhost:4000/api/gshds/delete/${elementId}`)
     .then((data) => {
-      this.props.handleUpdates();
+      this.props.getGSHDS();
     });
   }
 
@@ -54,8 +57,14 @@ class GSHDListing extends Component {
     </li>
     )
   }
-
-
 }
 
-export default GSHDListing;
+GSHDListing.propTypes = {
+  getGSHDS: PropTypes.func.isRequired,
+}
+
+export default connect(
+  null, {
+    getGSHDS
+  }
+)(GSHDListing);
