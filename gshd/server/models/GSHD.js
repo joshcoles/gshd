@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Schema to be referenced as gshd_geometry in gshd
+// Schema to be referenced as gshd_geometry in gshd schema below
 let LocationSchema = new Schema({
   type: {
     type: String,
