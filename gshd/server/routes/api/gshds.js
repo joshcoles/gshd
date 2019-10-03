@@ -38,9 +38,19 @@ router.post('/add', (req, res) => {
   
   // Save document to DB
   gshd.save()
-    .then(gshd => {
-      console.log('GSHD added successfully');
-      res.status(200).json({'GSHD': 'GSHD added successfully'});
+    .then(() => {
+
+      GSHD.find((err, gshds) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.status(200).send({
+            successMessage: 'GSHD added successfully',
+            updatedGSHDs: gshds
+          });
+        }
+      });
+      
     })
     .catch(err => {
       console.log(err);
