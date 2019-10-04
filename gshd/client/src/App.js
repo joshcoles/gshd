@@ -1,4 +1,3 @@
-import './styles/app.scss';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -6,6 +5,8 @@ import store from './store.js';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken.js';
 import { setCurrentUser, logoutUser } from './actions/authActions';
+
+import './styles/app.scss';
 
 // Components
 import Nav from './components/Nav/Nav.js';
@@ -21,20 +22,20 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute.js';
 // Check to see if user already has Auth token
 if (localStorage.jwtToken) {
 
-  // // Set auth token header
+  // Set auth token header
   setAuthToken(localStorage.jwtToken);
 
-  // // Decode token and get user info
+  // Decode token and get user info
   const decoded = jwt_decode(localStorage.jwtToken);
 
-  // // Set user and isAuthenticated in global state
+  // Set user and isAuthenticated in global state
   store.dispatch(setCurrentUser(decoded));
 
   // Check that token hasn't expired
   const currentTime = Date.now() / 1000; 
   
   if (decoded.exp < currentTime) {
-    store.dispatch(logoutUser(this.props.history));
+    store.dispatch(logoutUser());
     
     window.location.href = './login';
   }

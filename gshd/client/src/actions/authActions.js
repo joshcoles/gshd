@@ -35,6 +35,16 @@ export const loginUser = userData => {
   
         setAuthToken(res.data.token);
   
+        /*
+          Token comes in as a giant hash, which when decoded turns into something like this:          
+          {
+            id: "5d93562a0323523bb8b8aef", 
+            name: "Test Username", 
+            iat: 1570134943, 
+            exp: 1601693369
+          }        
+        */
+
         dispatch({
           type: SET_CURRENT_USER,
           payload: jwt_decode(res.data.token)
@@ -48,13 +58,6 @@ export const setCurrentUser = decoded => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded
-  };
-};
-
-// User loading
-export const setUserLoading = () => {
-  return {
-    type: USER_LOADING
   };
 };
 

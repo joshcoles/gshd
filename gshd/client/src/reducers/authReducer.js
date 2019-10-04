@@ -1,10 +1,9 @@
-import { SET_CURRENT_USER, USER_LOADING } from '../actions/types';
+import { SET_CURRENT_USER } from '../actions/types';
 import isEmpty from 'is-empty';
 
 const initialState = {
   isAuthenticated: false,
-  user: {},
-  loading: false
+  user: {}
 }
 
 export default (state = initialState, action) => {
@@ -17,11 +16,6 @@ export default (state = initialState, action) => {
         user: action.payload
       };
     
-    case USER_LOADING:
-      return {
-        ...state,
-        loading: true
-      }
     default: 
       return state;
   }
