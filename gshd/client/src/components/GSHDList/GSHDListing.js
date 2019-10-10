@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getGSHDS } from '../../actions/gshdActions.js';
+import { getGSHDS, deleteGSHD } from '../../actions/gshdActions.js';
 
 class GSHDListing extends Component {
 
   constructor(props) {
     super(props);
     
-    this.deleteGSHD = this.deleteGSHD.bind(this);
+    this.handleClicksToDelete = this.handleClicksToDelete.bind(this);
   }
 
-  deleteGSHD(e) {
-    const elementId = e.target.closest('.box').id;
-    axios.delete(`http://localhost:4000/api/gshds/delete/${elementId}`)
-    .then((data) => {
-      this.props.getGSHDS();
-    });
+  handleClicksToDelete(e) {
+    this.props.deleteGSHD(e)
+      .then(() => this.props.getGSHDS());
   }
-
+  
   render() {
 
     let dateString;
@@ -41,7 +37,7 @@ class GSHDListing extends Component {
               <div className="top-info-left">
                 <strong>{this.props.gshd.gshd_title}</strong>
               </div>
-              <span className="icon" onClick={this.deleteGSHD}>
+              <span className="icon" onClick={this.handleClicksToDelete}>
                 <i className="fas fa-window-close"></i>
               </span>
             </div>
@@ -61,10 +57,12 @@ class GSHDListing extends Component {
 
 GSHDListing.propTypes = {
   getGSHDS: PropTypes.func.isRequired,
+  deleteGSHD: PropTypes.func.isRequired
 }
 
 export default connect(
   null, {
-    getGSHDS
+    getGSHDS, 
+    deleteGSHD
   }
 )(GSHDListing);

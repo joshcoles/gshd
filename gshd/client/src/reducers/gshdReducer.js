@@ -1,4 +1,4 @@
-import { GET_GSHDS, NEW_GSHD } from '../actions/types.js';
+import { GET_GSHDS, NEW_GSHD, DELETE_GSHD } from '../actions/types.js';
 
 const initialState = {
   gshds: []
@@ -22,6 +22,12 @@ export default function (state = initialState, action) {
       return {
        ...state,
        gshds: action.payload 
+      }
+
+    case DELETE_GSHD:
+      
+      return {
+        ...state
       }
 
     default:
