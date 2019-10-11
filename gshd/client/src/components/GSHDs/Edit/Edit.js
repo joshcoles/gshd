@@ -1,9 +1,10 @@
+import './edit.scss';
 import React, { Component } from 'react';
 import axios from 'axios';
-import AutoCompletePlaces from '../utils/AutoCompletePlaces/AutoCompletePlaces.js';
-import Stars from '../ui/Stars.js';
+import AutoCompletePlaces from '../../utils/AutoCompletePlaces/AutoCompletePlaces.js';
+import Stars from '../../ui/Stars/Stars.js';
 
-class EditGSHD extends Component {
+class Edit extends Component {
 
   constructor(props) {
     super(props);
@@ -163,7 +164,7 @@ uploadImageToS3() {
     return (
       <div>
         <section className="section">
-          <h1>Edit your Gretzky-Style Hot Dog</h1>
+          <h1>Edit your Gretzky-Style Hot Dog v2</h1>
           <div className="container columns">
               <form className="column" onSubmit={this.onSubmit}>
                 <div className="container columns">
@@ -232,4 +233,4 @@ uploadImageToS3() {
   }
 }
 
-export default EditGSHD;
+export default Edit;

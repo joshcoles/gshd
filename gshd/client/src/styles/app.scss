@@ -1,103 +1,21 @@
 @import 'normalize';
 @import 'variables';
-@import 'doglist';
-@import 'stars';
+@import 'buttons';
+
+html {
+  background-color: $charcoal;
+}
 
 body {
-  font-family: Helvetica, sans-serif;
+  background-color: $mustard;
+  color: $charcoal;
+  font-family: $primary-font;
 }
 
-header {
-  background-color: $primary-color-light;
-  min-height: 600px;
-  position: relative;
-  &:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    bottom: 20px;
-    height: 50px;
-    border-top: 10px solid $white;
-    border-bottom: 10px solid $white;
-  }
-  &:before {
-    border-bottom: 10px solid $secondary-color-light;
-    content: "";
-    position: absolute;
-    width: 100%;
-    bottom: 50px;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: $secondary-font;
 }
 
-.red-text {
-  color: red;
-}
-
-.hero-content {
-  padding-top: 200px;
-  color: white;
-  position: absolute;
-  right: 0;
-  width: 50%;
-  z-index: 10;
-}
-
-.hero-bg-gretzky {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  background-repeat: no-repeat;
-  z-index: 5;
-}
-
-nav {
-  display: flex;
-  
-  img {
-    max-width: 50px;
-  }
-  ul {
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    list-style: none;
-  }
-}
-
-.map-container {
-  height: calc(75vh);
-  position: relative;
-  width: 100%;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  input {
-    margin-bottom: 10px;
-  }
-}
-
-.current-image {
-  display: inline-block;
-  position: relative;
-  img {
-    height: 200px;
-  }
-  
-  span {
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    top: 0;
-    &:hover {
-      opacity: 0.75;
-    }
-  }
+p {
+  margin-bottom: 15px;
 }

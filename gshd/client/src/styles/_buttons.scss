@@ -1,0 +1,30 @@
+
+.button {
+  font-family: $secondary-font;
+  font-weight: bold;
+  width: 100%;
+}
+
+.button-dark {
+  background-color: $charcoal;
+  border: 2px solid $charcoal;
+  color: $mustard;
+  
+  &:hover {
+    border: 2px solid $charcoal;
+    background-color: transparent;
+    color: $charcoal;
+  }
+}
+
+.button-dark-hollow {
+  border: 2px solid $charcoal;
+  background-color: transparent;
+  color: $charcoal;
+
+  &:hover {
+    background-color: $charcoal;
+    border: 2px solid $charcoal;
+    color: $mustard;
+  }
+}

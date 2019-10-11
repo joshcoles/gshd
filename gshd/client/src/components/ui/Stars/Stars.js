@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; 
+import './stars.scss';
 
 class Stars extends Component {
   constructor(props) {

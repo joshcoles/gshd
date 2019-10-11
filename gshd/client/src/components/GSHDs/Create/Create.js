@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AutoCompletePlaces from '../utils/AutoCompletePlaces/AutoCompletePlaces.js';
-import Stars from '../ui/Stars.js';
-import './CreateGSHD.scss';
+import AutoCompletePlaces from '../../utils/AutoCompletePlaces/AutoCompletePlaces.js';
+import Stars from '../../ui/Stars/Stars.js';
+import './create.scss';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { newGSHD } from '../../actions/gshdActions.js';
+import { newGSHD } from '../../../actions/gshdActions.js';
 
-class CreateGSHD extends Component {
+class Create extends Component {
 
   constructor(props) {
     super(props);
@@ -85,8 +85,6 @@ class CreateGSHD extends Component {
     this.setState({
       geometry: newGeometry,
       location: dataFromChild.address
-    }, () => {
-      console.log(this.state.geometry);
     });
   }
 
@@ -101,7 +99,7 @@ class CreateGSHD extends Component {
       imageName: name
     },
       () => this.uploadImageToS3()
-        .then((data) => {
+        .then(() => {
           this.setState({
             imageHasBeenUploaded: true,
             imageIsLoading: false
@@ -192,7 +190,7 @@ class CreateGSHD extends Component {
     return (
       <div>
         <section className="section">
-          <h1>CreateGSHD</h1>
+          <h1>CreateGSHD v2</h1>
           <div className="container columns">
             <form className="column" onSubmit={this.onSubmit}>
               <div className="container columns">
@@ -240,11 +238,11 @@ class CreateGSHD extends Component {
   }
 }
 
-CreateGSHD.propTypes = {
+Create.propTypes = {
   newGSHD: PropTypes.func.isRequired
 }
 
 export default connect(
   null,
   {newGSHD}
-)(CreateGSHD);
+)(Create);

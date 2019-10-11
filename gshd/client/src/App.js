@@ -1,23 +1,28 @@
+import './styles/app.scss';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// Redux
 import { Provider } from 'react-redux';
 import store from './store.js';
-import jwt_decode from 'jwt-decode';
-import setAuthToken from './utils/setAuthToken.js';
 import { setCurrentUser, logoutUser } from './actions/authActions';
-
-import './styles/app.scss';
 
 // Components
 import Nav from './components/Nav/Nav.js';
-import GSHDList from './components/GSHDList/GSHDList.js';
-import LandingPage from './components/LandingPage/LandingPage.js';
-import EditGSHD from './components/EditGSHD/EditGSHD.js';
-import CreateGSHD from './components/CreateGSHD/CreateGSHD.js';
+import Home from './components/Home/Home.js';
+
+// Auth
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken.js';
 import Register from '../src/components/authentication/Register/Register.js';
 import Login from '../src/components/authentication/Login/Login.js';
 import Profile from './components/Profile/Profile.js';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.js';
+
+// GSHD Components
+import Create from './components/GSHDs/Create/Create.js';
+import List from './components/GSHDs/List/List.js';
+import Edit from './components/GSHDs/Edit/Edit.js';
 
 // Check to see if user already has Auth token
 if (localStorage.jwtToken) {
@@ -51,10 +56,10 @@ class App extends Component {
             <Nav/>
           </div>
 
-          <Route path="/" exact component={LandingPage}/>
-          <Route path="/gshds" component={GSHDList}/>
-          <Route path="/create-gshd" component={CreateGSHD}/>
-          <Route path="/edit-gshd/:id" component={EditGSHD}/>
+          <Route path="/" exact component={Home}/>
+          <Route path="/gshds" component={List}/>
+          <Route path="/create-gshd" component={Create}/>
+          <Route path="/edit-gshd/:id" component={Edit}/>
           <Route path="/register" component={Register}/>
           <Route path="/login" component={Login}/>
 

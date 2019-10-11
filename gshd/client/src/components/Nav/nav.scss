@@ -1,0 +1,40 @@
+@import '../../styles/variables';
+
+.navbar {
+  background-color: $charcoal;
+  color: $mustard;
+  display: flex;
+  
+  .navbar-brand {
+    width: 100%;
+    @media only screen and (min-width: 1024px) {
+      width: auto;
+    }
+
+    .navbar-item {
+      color: $mustard;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+    }
+
+    .navbar-burger {
+      color: $mustard;
+    }
+  }
+
+
+
+  img {
+    max-width: 50px;
+  }
+
+  ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+}

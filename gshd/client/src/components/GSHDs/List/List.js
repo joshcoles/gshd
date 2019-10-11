@@ -1,11 +1,12 @@
+import './list.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getGSHDS } from '../../actions/gshdActions.js';
-import Map from '../Map/Map.js';
-import GSHDListing from './GSHDListing.js';
+import { getGSHDS } from '../../../actions/gshdActions.js';
+import Map from '../../Map/Map.js';
+import Listing from './Listing.js';
 import PropTypes from 'prop-types';
 
-class GSHDList extends Component {
+class List extends Component {
   
   componentDidMount() {
     this.props.getGSHDS();
@@ -19,7 +20,7 @@ class GSHDList extends Component {
           <div className="columns">
             <div className="column is-one-third dog-list-cards">
               <ul>
-                {this.props.gshds.map((gshd, index) => <GSHDListing gshd={gshd} key={index} handleUpdates={this.props.getGSHDS} />)}
+                {this.props.gshds.map((gshd, index) => <Listing gshd={gshd} key={index} handleUpdates={this.props.getGSHDS} />)}
               </ul>
             </div>
             <div className="column is-two-thirds">
@@ -34,7 +35,7 @@ class GSHDList extends Component {
   }
 }
 
-GSHDList.propTypes = {
+List.propTypes = {
   getGSHDS: PropTypes.func.isRequired,
   gshds: PropTypes.array.isRequired
 }
@@ -46,4 +47,4 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   { getGSHDS }
-)(GSHDList);
+)(List);

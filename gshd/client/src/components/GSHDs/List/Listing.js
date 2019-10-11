@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getGSHDS, deleteGSHD } from '../../actions/gshdActions.js';
+import { getGSHDS, deleteGSHD } from '../../../actions/gshdActions.js';
 
-class GSHDListing extends Component {
+class Listing extends Component {
 
   constructor(props) {
     super(props);
@@ -55,7 +55,7 @@ class GSHDListing extends Component {
   }
 }
 
-GSHDListing.propTypes = {
+Listing.propTypes = {
   getGSHDS: PropTypes.func.isRequired,
   deleteGSHD: PropTypes.func.isRequired
 }
@@ -65,4 +65,4 @@ export default connect(
     getGSHDS, 
     deleteGSHD
   }
-)(GSHDListing);
+)(Listing);

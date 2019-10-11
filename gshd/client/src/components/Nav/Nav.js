@@ -1,12 +1,21 @@
+import './nav.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import icon from '../../images/gshd.png';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { logoutUser } from '../../actions/authActions';
 
-
 class Nav extends Component {
+
+  constructor() {
+    super();
+    
+    this.state = {
+      hamburgerIsOpen: false
+    }
+
+    this.onHamburgerClick = this.onHamburgerClick.bind(this);
+  }
   
   onLogoutClick = e => {
     e.preventDefault();
@@ -15,25 +24,42 @@ class Nav extends Component {
     this.props.logoutUser();
   };
 
+  onLinkClick = () => {
+    this.setState({
+      hamburgerIsOpen: false
+    });
+  }
+
+  onHamburgerClick(e) {
+    e.preventDefault();
+
+    this.setState({
+      hamburgerIsOpen: !this.state.hamburgerIsOpen
+    });
+    
+  }
+
   render() {
     
     // To display when user is logged out
     const loggedOutButtons = (
-      <div className="navbar-item">
-        <div className="buttons">
-          <Link to="/register" className="button is-primary">
+      <React.Fragment>
+        <div className="navbar-item">
+          <Link to="/register" onClick={this.onLinkClick} className="button is-primary">
             <strong>Sign up</strong>
           </Link>
-          <Link to="/login" className="button is-light">Log in</Link>
         </div>
-      </div>
+        <div className="navbar-item">
+          <Link to="/login" onClick={this.onLinkClick} className="button is-light">Log in</Link>
+        </div>
+      </React.Fragment>
     );
 
     // To display when user is logged in
     const profileButton = (
       <div className="navbar-item">
         <div className="buttons">
-          <Link to="/profile" className="button is-white">Profile</Link>
+          <Link to="/profile" onClick={this.onLinkClick} className="button is-white">Profile</Link>
           <button className="button is-white" onClick={this.onLogoutClick}>Logout</button>
         </div>
       </div>
@@ -42,19 +68,24 @@ class Nav extends Component {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <Link className="navbar-item" to="/">
-            <img src={icon} alt=""/>
-          </Link>
-          <a href="/" role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+          <Link className="navbar-item" onClick={this.onLinkClick} to="/">GSHD</Link>
+
+          <span
+            onClick={this.onHamburgerClick} 
+            role="button" 
+            className={`navbar-burger burger ${this.state.hamburgerIsOpen ? 'is-active' : ''}`} 
+            aria-label="menu" 
+            aria-expanded="false" 
+            data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+          </span>
         </div>
-        <div className="navbar-menu">
+        <div className={`navbar-menu ${this.state.hamburgerIsOpen ? 'is-active' : ''}`}>
           <div className="navbar-start">
-            <Link className="navbar-item" to="/gshds">GSHDs</Link>
-            <Link className="navbar-item" to="/create-gshd">Create GSHD</Link>
+            <Link className="navbar-item" onClick={this.onLinkClick} to="/gshds">GSHDs</Link>
+            <Link className="navbar-item" onClick={this.onLinkClick} to="/create-gshd">Create GSHD</Link>
           </div>
           <div className="navbar-end">
             {this.props.isAuthenticated ? profileButton : loggedOutButtons}
