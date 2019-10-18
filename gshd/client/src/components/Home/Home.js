@@ -18,7 +18,7 @@ class Home extends Component {
   }
 
   render() {
-    
+
     return (
       <div className="home">
         <section className="hero">
@@ -28,8 +28,8 @@ class Home extends Component {
               <h2 className="subtitle">A celebration of Wayne Gretzky's strange eating habits.</h2>
             </div>
             <div className="container cta-container">
-              <Link className="button button-dark-hollow">See GSHDs</Link>
-              <Link className="button button-dark">Join the Community</Link>
+              <Link to="/gshds" className="button button-dark-hollow">See GSHDs</Link>
+              <Link to="/register" className="button button-dark">Join the Community</Link>
             </div>
           </div>
         </section>
@@ -49,20 +49,11 @@ class Home extends Component {
             <p>Most notable of all was his fondness of hot dogs with—-and I cannot stress this enough--only mustard and onions on them.</p>
             <p>Shortly after, this site's creator created an <a href="https://instagram.com/gretzkystylehotdog/">instagram account</a> by the same name, which quickly gained a small following of GSHD fans. The rest is history.</p>
           </div>
-
-
-          
         </section>
-        <section className="section">
+        <section className="section pull-quote">
           <div className="container">
-            <h2>What is this?</h2>
-            <p>On June 15th, someone created <a href={this.state.landingPage.articleLink}>this post</a> on the /r/hockey subreddit. While that user has since deleted their account, but their story will live on forever.</p>
-            <p>Shortly after, I created gretzkystylehotdog</p>
-          </div>
-        </section>
-        <section className="section">
-          <div className="container">
-           <span>{this.state.landingPage.gretzkyQuotes.secret}</span>
+            <span className="quotation">{this.state.landingPage.gretzkyQuotes.secret}</span>
+            <span className="author"> - Wayne Gretzky</span>
           </div>
         </section>
       </div>

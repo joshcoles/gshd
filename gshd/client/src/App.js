@@ -10,6 +10,7 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 // Components
 import Nav from './components/Nav/Nav.js';
 import Home from './components/Home/Home.js';
+import Footer from './components/Footer/Footer.js';
 
 // Auth
 import jwt_decode from 'jwt-decode';
@@ -66,7 +67,9 @@ class App extends Component {
           <Switch>
             <PrivateRoute exact path="/profile" component={Profile} />
           </Switch>
-          
+
+          <Footer/>
+
         </Router>
       </Provider>
     );

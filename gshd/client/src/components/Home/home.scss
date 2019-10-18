@@ -2,7 +2,6 @@
 
 .home {
   .hero {
-    background: linear-gradient(190deg, $mustard 0%, darken($mustard, 25%) 100%);
     background-repeat: repeat;
     min-height: 400px;
 
@@ -66,6 +65,19 @@
           padding: 0 0.2em;
         }
       }
+    }
+  }
+
+  .pull-quote {
+    span {
+      display: block;
+      font-size: 30px;
+      text-align: center;
+    }
+    .author {
+      font-style: italic;
+      font-size: 16px;
+      text-align: right;
     }
   }
 }

@@ -3,7 +3,6 @@
 .navbar {
   background-color: $charcoal;
   color: $mustard;
-  display: flex;
   
   .navbar-brand {
     width: 100%;
@@ -19,10 +18,41 @@
 
     .navbar-burger {
       color: $mustard;
+
+      span {
+        height: 2px;
+      }
     }
   }
 
+  .navbar-menu {
+    padding: 0;
+    
+    &.is-active {
+      background-color: $dog;
 
+      .navbar-item {
+        color: $mustard;
+        font-weight: bold;
+      }
+
+      .navbar-start {
+        .navbar-item {
+          &:hover {
+            background-color: darken($dog, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-end {
+    .buttons {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
 
   img {
     max-width: 50px;

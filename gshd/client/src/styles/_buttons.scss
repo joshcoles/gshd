@@ -28,3 +28,14 @@
     color: $mustard;
   }
 }
+
+.button-yellow {
+  background-color: $mustard;
+  border: 2px solid $mustard;
+  color: $charcoal;
+
+  &:hover {
+    background-color: darken($mustard, 10%);
+    border: 2px solid darken($mustard, 10%);
+  }
+}

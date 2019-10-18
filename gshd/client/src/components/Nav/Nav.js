@@ -59,8 +59,8 @@ class Nav extends Component {
     const profileButton = (
       <div className="navbar-item">
         <div className="buttons">
-          <Link to="/profile" onClick={this.onLinkClick} className="button is-white">Profile</Link>
-          <button className="button is-white" onClick={this.onLogoutClick}>Logout</button>
+          <Link to="/profile" onClick={this.onLinkClick} className="button button-dark">Profile</Link>
+          <button className="button button-yellow" onClick={this.onLogoutClick}>Logout</button>
         </div>
       </div>
     )
