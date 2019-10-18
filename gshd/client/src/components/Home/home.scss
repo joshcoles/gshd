@@ -3,6 +3,7 @@
 .home {
   .hero {
     background: linear-gradient(190deg, $mustard 0%, darken($mustard, 25%) 100%);
+    background-repeat: repeat;
     min-height: 400px;
 
     .title-container {
@@ -34,7 +35,17 @@
     color: $mustard;
 
     .subtitle {
+      border-bottom: 2px solid $mustard;
       color: $mustard;
+    }
+
+    a {
+      color: $mustard;
+      text-decoration: underline;
+      
+      &:hover {
+        text-decoration: none;
+      }
     }
 
     .container {
@@ -52,12 +63,7 @@
         font-size: 0.8em;
 
         a {
-          color: $charcoal;
-          text-decoration: underline;
           padding: 0 0.2em;
-          &:hover {
-            opacity: 0.75;
-          }
         }
       }
     }
